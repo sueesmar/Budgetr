@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
-        final Button bBack = (Button) findViewById(R.id.bBack);
+        final Button bBack = (Button) findViewById(R.id.bMain);
 
         bBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +82,5 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
-    }
-
-    public void onClickSignup(View view) {
     }
 }
