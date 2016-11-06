@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_signup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2FDD86"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:weightSum="1"
+    tools:context="ch.msengineering.budgetr.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="86dp"
+        android:layout_height="76dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logobudgetr" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:text="Create a new account"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_email"
+
+            />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/txAllRightReserved"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/txAllRightReserved"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/white" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+
+            android:inputType="textEmailAddress|textPersonName"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_lock" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="#ffffff" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="205dp"
+        android:layout_weight="0.69"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/txAllRightReserved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="© All Rights Reserved. Budgetr 2016." />
+
+        <Button
+            android:id="@+id/bRegister"
+            android:layout_width="319dp"
+            android:layout_height="38dp"
+            android:layout_above="@+id/bSignup"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
+            android:background="#ffffff"
+            android:text="Register >"
+            android:textSize="18dp"
+            tools:ignore="UnknownId" />
+
+        <Button
+            android:id="@+id/bBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txAllRightReserved"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/signinbutton"
+            android:text=" Back"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+
+</LinearLayout>
