@@ -14,17 +14,17 @@
     <ImageView
         android:layout_width="72dp"
         android:layout_height="78dp"
-        android:src="@drawable/logobudgetr"
         android:layout_gravity="center"
+        android:src="@drawable/logobudgetr"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Login to your account"
-        android:textColor="#ffffff"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="15dp"
+        android:text="Login to your account"
+        android:textColor="#ffffff"
         android:textSize="15dp" />
 
     <LinearLayout
@@ -44,8 +44,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="textEmailAddress"
             android:hint=""
+            android:inputType="textEmailAddress"
             android:textColor="#ffffff"
 
             />
@@ -65,22 +65,22 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
             android:hint="password"
+            android:inputType="textPassword"
             android:textColor="#ffffff"
 
             />
         </LinearLayout>
     <Button
+        android:id="@+id/bLogin"
         android:layout_width="319dp"
         android:layout_height="38dp"
-        android:text="Login >"
-        android:textSize="18dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="5dp"
         android:background="#ffffff"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
-        android:id="@+id/bLogin" />
+        android:text="Login >"
+        android:textSize="18dp" />
 
 
     <RelativeLayout
@@ -102,13 +102,13 @@
             android:id="@+id/bMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/signinbutton"
-
-            android:onClick="onClickSignup"
-            android:textColor="#ffffff"
-            android:text=" Back"
             android:layout_above="@+id/txAllRightReserved"
-            android:layout_centerHorizontal="true" />
+
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/signinbutton"
+            android:onClick="onClickSignup"
+            android:text=" Back"
+            android:textColor="#ffffff" />
 
     </RelativeLayout>
 
