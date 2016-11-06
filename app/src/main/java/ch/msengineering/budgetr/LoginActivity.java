@@ -28,7 +28,17 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+
         final Button bLogin = (Button) findViewById(R.id.bLogin);
+        final Button bBack = (Button) findViewById(R.id.bMain);
+
+        bBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                LoginActivity.this.startActivity(intent);
+            }
+        });
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String name  = jsonResponse.getString("name");
                                 String email = jsonResponse.getString("email");
 
-                                Intent intent = new Intent(LoginActivity.this, ExpenditureActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, BalanceOverviewActivity.class);
                                 intent.putExtra("name", name);
                                 intent.putExtra("email", email);
                                 intent.putExtra("username", username);
@@ -72,19 +82,5 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
-
-        final Button bBackToMain = (Button) findViewById(R.id.bBackToMain);
-
-        bBackToMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerIntent = new Intent(LoginActivity.this, MainActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
-            }
-        });
-
-    }
-
-    public void onClickSignup(View view) {
     }
 }

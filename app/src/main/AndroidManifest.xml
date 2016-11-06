@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
+    <!-- TODO Change Logo in Launcher -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +20,15 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ExpenditureActivity"></activity>
+        <activity android:name=".BalanceOverviewActivity" />
+        <activity android:name=".ListEarningsActivity" />
+        <activity android:name=".ListExpendituresActivity" />
+        <activity android:name=".EditorEarningsActivity" />
+        <activity android:name=".EditorExpendituresActivity"></activity>
+        <provider
+            android:name=".data.BudgetrProvider"
+            android:authorities="ch.mse.myBudget"
+            android:exported="false" />
     </application>
 
 </manifest>
