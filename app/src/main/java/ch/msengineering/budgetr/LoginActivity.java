@@ -30,15 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
-        final Button bBack = (Button) findViewById(R.id.bBack);
-
-        bBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                LoginActivity.this.startActivity(intent);
-            }
-        });
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
