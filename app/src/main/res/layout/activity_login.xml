@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_signup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2FDD86"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    tools:context="ch.msengineering.budgetr.MainActivity">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="78dp"
+        android:src="@drawable/logobudgetr"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Login to your account"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="31dp"
+            android:src="@drawable/icon_email"
+
+            />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="textEmailAddress"
+            android:hint=""
+            android:textColor="#ffffff"
+
+            />
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="39dp"
+            android:src="@drawable/icon_lock" />
+
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="password"
+            android:textColor="#ffffff"
+
+            />
+        </LinearLayout>
+    <Button
+        android:layout_width="319dp"
+        android:layout_height="38dp"
+        android:text="Login >"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/bLogin" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/txAllRightReserved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="© All Rights Reserved. Budgetr 2016."
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/bMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signinbutton"
+
+            android:onClick="onClickSignup"
+            android:textColor="#ffffff"
+            android:text=" Back"
+            android:layout_above="@+id/txAllRightReserved"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>
+

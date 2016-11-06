@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_expenditure"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2FDD86"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    tools:context="ch.msengineering.budgetr.ExpenditureActivity"
+    android:weightSum="1"
+    android:baselineAligned="false">
+
+    <EditText
+        android:layout_width="139dp"
+        android:ems="10"
+        android:id="@+id/etDescription"
+        android:hint="Description "
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_weight="1"
+        android:inputType="text"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/etAmount"
+        android:layout_alignStart="@+id/etAmount" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/etDate"
+        android:layout_weight="1"
+        android:inputType="datetime"
+        android:hint="Date"
+        android:layout_above="@+id/txAllRightReserved"
+        android:layout_alignLeft="@+id/txAllRightReserved"
+        android:layout_alignStart="@+id/txAllRightReserved"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="19dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/etAmount"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:hint="Amount"
+        android:layout_above="@+id/etDate"
+        android:layout_alignLeft="@+id/etReceipt"
+        android:layout_alignStart="@+id/etReceipt"
+        android:layout_marginBottom="45dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/etReceipt"
+        android:layout_marginTop="61dp"
+        android:layout_below="@+id/txAllRightReserved"
+        android:hint="Receipt"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/etPlace"
+        android:layout_weight="1"
+        android:hint="Place" />
+
+    <RelativeLayout
+        android:layout_width="354dp"
+        android:layout_height="205dp"
+        android:gravity="center"
+        android:layout_weight="0.59">
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:id="@+id/slPAymentmethode" >
+
+    </ListView>
+
+</LinearLayout>

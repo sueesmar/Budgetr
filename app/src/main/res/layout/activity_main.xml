@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="#2FDD86"
+    >
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="122dp"
+        android:layout_weight="0.65"
+        android:src="@drawable/logobudgetr"
+        android:paddingTop="40dp"
+        android:id="@+id/pSignin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Know where your money goes"
+        android:textColor="#ffffff"
+        android:textSize="22dp"
+        android:layout_weight="1"
+
+        android:paddingBottom="10dp"
+
+        android:id="@+id/txKnowYourMoney" />
+<Button
+    android:id="@+id/bSignup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="New to Budgetr"
+    android:layout_margin="10dp"
+    android:background="@drawable/signupbutton"
+
+    android:accessibilityLiveRegion="none" />
+
+    <Button
+        android:id="@+id/bSignin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:layout_margin="10dp"
+        android:text="Already using Budgetr"
+        android:background="@drawable/signinbutton"
+
+        android:accessibilityLiveRegion="none" />
+
+
+</LinearLayout>
