@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_list_earnings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorBackgroundApp"
+    tools:context="ch.msengineering.budgetr.ListExpendituresActivity"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/list_expenditures"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!-- Empty view for the list -->
+    <RelativeLayout
+        android:id="@+id/expenditures_empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/empty_earnings_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_empty_earnings"/>
+
+        <TextView
+            android:id="@+id/empty_expenditures_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_earnings_image"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="16dp"
+            android:text="@string/empty_expenditures_title_text"
+            android:textColor="@color/colorTextExpendituresOverview"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+        <TextView
+            android:id="@+id/empty_expenditures_subtitle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_expenditures_text"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="8dp"
+            android:text="@string/empty_expenditures_subtitle_text"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/colorTextExpendituresOverview"/>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_expenditures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_earning"/>
+
+</RelativeLayout>

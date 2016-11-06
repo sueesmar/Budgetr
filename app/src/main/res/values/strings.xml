@@ -1,3 +1,51 @@
 <resources>
     <string name="app_name">Budgetr</string>
+    <string name="password">Password</string>
+    <string name="email">E-mail</string>
+
+    <string name="SpentThisMonth">Spent this month</string>
+    <string name="EarnedThisMonth">Earned this month</string>
+    <string name="ActualBalance">Actual Balance</string>
+    <string name="btn_show_earnings">My Earnings</string>
+    <string name="btn_show_expenditures">My Expenditures</string>
+
+    <string name="empty_earnings_title_text">No earnings so far</string>
+    <string name="empty_earnings_subtitle_text">Get a Job and start earning money :-)</string>
+    <string name="empty_expenditures_title_text">No expenditures so far</string>
+    <string name="empty_expenditures_subtitle_text">Good, but when you spent your money, add it here.</string>
+    <string name="tv_currency">CHF</string>
+
+    <string name="unknown_expenditure_description">What you spent this for?</string>
+
+    <string name="unknown_earning_description">Where you earned this money?</string>
+    <string name="title_activity_editor_expenditures">EditorExpendituresActivity</string>
+
+    <string name="action_delete">Delete entry</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete_all_entries">Delete all</string>
+    <string name="action_insert_dummy_data">Insert dummy data</string>
+
+    <!-- activity_editor_expenditures.xml -->
+    <string name="editor_expenditures_description">Description</string>
+    <string name="hint_editor_expenditures_description">What you spent money for?</string>
+    <string name="tv_editor_expenditures_amount">Amount</string>
+    <string name="tv_editor_expenditures_date">Date</string>
+    <string name="tv_editor_expenditures_place">Place</string>
+    <string name="hint_editor_expenditures_place">Where you spent your money?</string>
+    <string name="hint_editor_expenditures_date">When you spent your money?</string>
+
+    <string name="editor_expenditures_activity_title_new_expenditure">Add new expenditure</string>
+    <string name="editor_expenditures_activity_title_edit_expenditure">Edit expenditure</string>
+    <string name="editor_expenditures_insert_expenditure_failed">Expenditure can\'t be added because of error!</string>
+    <string name="editor_expenditures_insert_expenditure_successful">Expenditure added successfully!</string>
+    <string name="editor_expenditures_update_expenditure_failed">Expenditure can\'t be updated because of error!</string>
+    <string name="editor_expenditures_update_expenditure_successful">Expenditure updated successfully!</string>
+    <string name="unsaved_changes_dialog_msg">There are unsaved changes!</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep editing</string>
+    <string name="delete_dialog_msg">Are you sure you want to delete?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="editor_expenditures_delete_expenditure_failed">Deleting expenditure failed!</string>
+    <string name="editor_expenditures_delete_expenditure_successful">Expenditure deleted successfully!</string>
 </resources>

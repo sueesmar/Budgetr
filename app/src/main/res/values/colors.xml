@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTextBalanceOverview">#FFFFFF</color>
+    <color name="colorBackgroundApp">#2FDD86</color>
+    <color name="colorTextEarningsOverview">#FFFFFF</color>
+    <color name="colorTextExpendituresOverview">#FFFFFF</color>
+    <color name="colorTextEditorExpenditure">#FFFFFF</color>
 </resources>
