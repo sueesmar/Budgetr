@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
 
         final Button bRegister = (Button) findViewById(R.id.bRegister);
-        final Button bBack = (Button) findViewById(R.id.bBack);
+        final Button bBack = (Button) findViewById(R.id.bBackToMain);
 
         bBack.setOnClickListener(new View.OnClickListener() {
             @Override
