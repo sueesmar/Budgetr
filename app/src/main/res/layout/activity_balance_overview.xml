@@ -22,87 +22,147 @@
         android:textStyle="normal|bold"
         android:paddingBottom="16dp"/>
 
-    <RelativeLayout
+        <LinearLayout
+        android:id="@+id/container_balance_overview_earning"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_balance_overview_spent_this_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/SpentThisMonth"
-            android:textColor="@color/colorTextBalanceOverview"
-            android:paddingBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tv_balance_overview_money_spent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="100 CHF"
-            android:textColor="@color/colorTextBalanceOverview"
-            android:layout_gravity="right"
-            android:paddingBottom="8dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_balance_overview_earned_this_month"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:text="@string/EarnedThisMonth"
             android:textColor="@color/colorTextBalanceOverview"
+            android:textAppearance="?android:textAppearanceMedium"
             android:paddingBottom="8dp"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_balance_overview_money_earned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="100"
+                android:textColor="@color/colorTextBalanceOverview"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:paddingBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tv_balance_overview_money_earned_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextBalanceOverview"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:paddingRight="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/tv_currency" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_balance_overview_expenditure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_balance_overview_money_earned"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_balance_overview_spent_this_month"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="200 CHF"
+            android:layout_weight="2"
+            android:text="@string/SpentThisMonth"
             android:textColor="@color/colorTextBalanceOverview"
-            android:layout_alignBaseline="@+id/tv_balance_overview_earned_this_month"
-            android:layout_alignBottom="@+id/tv_balance_overview_earned_this_month"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:textAppearance="?android:textAppearanceMedium"
             android:paddingBottom="8dp"/>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_balance_overview_money_spent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="100"
+                android:textColor="@color/colorTextBalanceOverview"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:paddingBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tv_balance_overview_money_spent_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextBalanceOverview"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:paddingRight="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/tv_currency" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
+        android:layout_height="3dp"
+        android:background="@android:color/white" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/container_balance_overview_balance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="16dp">
 
         <TextView
             android:id="@+id/tv_balance_overview_balance"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:text="@string/ActualBalance"
             android:textColor="@color/colorTextBalanceOverview"
-            android:paddingTop="8dp"/>
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
 
-        <TextView
-            android:id="@+id/tv_balance_overview_balance_value"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="100 CHF"
-            android:textColor="@color/colorTextBalanceOverview"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:paddingTop="8dp"/>
+            android:layout_weight="1">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_balance_overview_balance_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="100"
+                android:textColor="@color/colorTextBalanceOverview"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textStyle="bold"
+                android:paddingBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tv_balance_overview_money_balance_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextBalanceOverview"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:paddingRight="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/tv_currency" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"

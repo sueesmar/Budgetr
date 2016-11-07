@@ -327,7 +327,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             String description = cursor.getString(descriptionColumnIndex);
 
             // Update the views on the screen with the values from the database
-            mAmountEditText.setText(Float.toString(amount));
+            mAmountEditText.setText(String.format("%1$.2f",amount));
             mDateEditText.setText(date);
             mPlaceEditText.setText(place);
             mDescriptionEditText.setText(description);

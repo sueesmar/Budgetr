@@ -5,7 +5,7 @@
 
     <string name="SpentThisMonth">Spent this month</string>
     <string name="EarnedThisMonth">Earned this month</string>
-    <string name="ActualBalance">Actual Balance</string>
+    <string name="ActualBalance">Money left this month</string>
     <string name="btn_show_earnings">My Earnings</string>
     <string name="btn_show_expenditures">My Expenditures</string>
 
@@ -32,14 +32,14 @@
     <string name="tv_editor_expenditures_date">Date</string>
     <string name="tv_editor_expenditures_place">Place</string>
     <string name="hint_editor_expenditures_place">Where you spent your money?</string>
-    <string name="hint_editor_expenditures_date">When you spent your money?</string>
+    <string name="hint_editor_expenditures_date">DD/MM/YY</string>
 
     <!-- activity_editor_earnings.xml -->
     <string name="editor_earnings_description">Description</string>
     <string name="hint_editor_earnings_description">What you get money for?</string>
     <string name="tv_editor_earnings_salarymount">Amount</string>
     <string name="tv_editor_earnings_date">Date</string>
-    <string name="hint_editor_earnings_date">When you get your money?</string>
+    <string name="hint_editor_earnings_date">DD/MM/YY</string>
 
     <string name="editor_expenditures_activity_title_new_expenditure">Add new expenditure</string>
     <string name="editor_expenditures_activity_title_edit_expenditure">Edit expenditure</string>

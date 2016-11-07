@@ -298,7 +298,7 @@ public class EditorEarningsActivity extends AppCompatActivity implements
 
 
             // Update the views on the screen with the values from the database
-            mSalarymountEditText.setText(Float.toString(amount));
+            mSalarymountEditText.setText(String.format("%1$.2f",amount));
             mDateEditText.setText(date);
         }
     }

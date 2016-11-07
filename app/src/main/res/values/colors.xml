@@ -9,4 +9,5 @@
     <color name="colorTextExpendituresOverview">#FFFFFF</color>
     <color name="colorTextEditorExpenditure">#FFFFFF</color>
     <color name="colorTextEditorEarning">#FFFFFF</color>
+    <color name="colorTextBalanceOverviewNegativ">#FF4081</color>
 </resources>

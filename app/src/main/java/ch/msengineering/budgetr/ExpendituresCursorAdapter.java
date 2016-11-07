@@ -44,7 +44,7 @@ public class ExpendituresCursorAdapter extends CursorAdapter{
 
     /**
      * This method binds the earnings data (in the current row pointed to by cursor) to the given
-     * list item layout. For example, the name for the current pet can be set on the name TextView
+     * list item layout. For example, the name for the current expenditure can be set on the name TextView
      * in the list item layout.
      *
      * @param view    Existing view, returned earlier by newView() method
@@ -67,7 +67,7 @@ public class ExpendituresCursorAdapter extends CursorAdapter{
         // Read the expenditure attributes from the Cursor for the current expenditure
         String expenditureDescription = cursor.getString(descriptionColumnIndex);
         String expenditureDate = cursor.getString(dateColumnIndex);
-        String expenditureValue = cursor.getString(valueColumnIndex);
+        float expenditureValue = cursor.getFloat(valueColumnIndex);
 
         // If the expenditure description is empty string or null, then use some default text
         // that says "What you spent this for?", so the TextView isn't blank.
@@ -78,7 +78,7 @@ public class ExpendituresCursorAdapter extends CursorAdapter{
         // Update the TextViews with the attributes for the current expenditure
         descriptionTextView.setText(expenditureDescription);
         dateTextView.setText(expenditureDate);
-        valueTextView.setText(expenditureValue);
+        valueTextView.setText(String.format("%1$.2f",expenditureValue));
     }
 
 }

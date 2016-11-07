@@ -44,7 +44,7 @@ public class EarningsCursorAdapter extends CursorAdapter{
 
     /**
      * This method binds the earnings data (in the current row pointed to by cursor) to the given
-     * list item layout. For example, the name for the current pet can be set on the name TextView
+     * list item layout. For example, the name for the current earning can be set on the name TextView
      * in the list item layout.
      *
      * @param view    Existing view, returned earlier by newView() method
@@ -65,10 +65,10 @@ public class EarningsCursorAdapter extends CursorAdapter{
         int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE);
         int valueColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT);
 
-        // Read the pet attributes from the Cursor for the current pet
+        // Read the earning attributes from the Cursor for the current earning
         String earningDescription = cursor.getString(descriptionColumnIndex);
         String earningDate = cursor.getString(dateColumnIndex);
-        String earningValue = cursor.getString(valueColumnIndex);
+        float earningValue = cursor.getFloat(valueColumnIndex);
 
         // If the description is empty string or null, then use some default text
         // that says "Unknown breed", so the TextView isn't blank.
@@ -76,10 +76,10 @@ public class EarningsCursorAdapter extends CursorAdapter{
             earningDescription = context.getString(R.string.unknown_earning_description);
         }
 
-        // Update the TextViews with the attributes for the current pet
+        // Update the TextViews with the attributes for the current earning
         descriptionTextView.setText(earningDescription);
         dateTextView.setText(earningDate);
-        valueTextView.setText(earningValue);
+        valueTextView.setText(String.format("%1$.2f",earningValue));
     }
 
 }
