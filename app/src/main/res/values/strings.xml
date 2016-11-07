@@ -34,6 +34,13 @@
     <string name="hint_editor_expenditures_place">Where you spent your money?</string>
     <string name="hint_editor_expenditures_date">When you spent your money?</string>
 
+    <!-- activity_editor_earnings.xml -->
+    <string name="editor_earnings_description">Description</string>
+    <string name="hint_editor_earnings_description">What you get money for?</string>
+    <string name="tv_editor_earnings_salarymount">Amount</string>
+    <string name="tv_editor_earnings_date">Date</string>
+    <string name="hint_editor_earnings_date">When you get your money?</string>
+
     <string name="editor_expenditures_activity_title_new_expenditure">Add new expenditure</string>
     <string name="editor_expenditures_activity_title_edit_expenditure">Edit expenditure</string>
     <string name="editor_expenditures_insert_expenditure_failed">Expenditure can\'t be added because of error!</string>
@@ -48,4 +55,14 @@
     <string name="cancel">Cancel</string>
     <string name="editor_expenditures_delete_expenditure_failed">Deleting expenditure failed!</string>
     <string name="editor_expenditures_delete_expenditure_successful">Expenditure deleted successfully!</string>
+
+    <string name="editor_earnings_activity_title_new_earning">Add new earning</string>
+    <string name="editor_earnings_activity_title_edit_earning">Edit earning</string>
+    <string name="editor_earnings_insert_earning_failed">Earning can\'t be added because of error!</string>
+    <string name="editor_earnings_insert_earning_successful">Earning added successfully!</string>
+    <string name="editor_earnings_update_earning_failed">Earning can\'t be updated because of error!</string>
+    <string name="editor_earnings_update_earning_successful">Earning updated successfully!</string>
+    <string name="editor_earnings_delete_earning_failed">Deleting earning failed!</string>
+    <string name="editor_earnings_delete_earning_successful">Earning deleted successfully!</string>
+
 </resources>

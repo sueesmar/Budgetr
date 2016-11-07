@@ -130,6 +130,7 @@ public class BudgetrProvider extends ContentProvider {
                 // Cursor containing that row of the table.
                 cursor = database.query(BudgetrContract.SalaryEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
+                break;
             case EXPENDITURES:
                 cursor = database.query(BudgetrContract.ExpenditureEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
@@ -242,7 +243,7 @@ public class BudgetrProvider extends ContentProvider {
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         // Insert the new earning with the given values
-        long id = database.insert(BudgetrContract.ExpenditureEntry.TABLE_NAME, null, values);
+        long id = database.insert(BudgetrContract.SalaryEntry.TABLE_NAME, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
