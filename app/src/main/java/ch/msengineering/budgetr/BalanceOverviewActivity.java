@@ -66,7 +66,7 @@ public class BalanceOverviewActivity extends AppCompatActivity {
         float amount = getTotalEarnings();
 
         //Format with two decimals
-        mTotalEarningTextView.setText(Float.toString(amount));
+        mTotalEarningTextView.setText(String.format("%1$.2f",amount));
     }
 
     /***
