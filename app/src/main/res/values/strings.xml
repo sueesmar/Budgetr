@@ -2,6 +2,9 @@
     <string name="app_name">Budgetr</string>
     <string name="password">Password</string>
     <string name="email">E-mail</string>
+    <string name="label_activity_balance_overview">Balance Overview</string>
+    <string name="label_activity_list_earnings">My Earnings</string>
+    <string name="label_activity_list_expenditures">My Expenditures</string>
 
     <string name="SpentThisMonth">Spent this month</string>
     <string name="EarnedThisMonth">Earned this month</string>

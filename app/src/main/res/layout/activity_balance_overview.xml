@@ -12,6 +12,7 @@
     tools:context="ch.msengineering.budgetr.BalanceOverviewActivity"
     android:orientation="vertical">
 
+    <!-- Not needed anymore, because of label of activity
     <TextView
         android:id="@+id/tv_balance_overview_title"
         android:layout_width="wrap_content"
@@ -21,7 +22,7 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textStyle="normal|bold"
         android:paddingBottom="16dp"/>
-
+    -->
         <LinearLayout
         android:id="@+id/container_balance_overview_earning"
         android:layout_width="match_parent"
