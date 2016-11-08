@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_editor_earnings"
     android:layout_width="match_parent"
@@ -8,6 +8,113 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorBackgroundApp"
+    android:orientation="vertical"
     tools:context="ch.msengineering.budgetr.EditorEarningsActivity">
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/container_editor_earnings_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_editor_earnings_salarymount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_editor_earnings_salarymount"
+            android:textColor="@color/colorTextEditorEarning"
+            android:paddingBottom="8dp"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
+            <EditText
+                android:id="@+id/et_editor_earnings_salarymount"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorTextEditorEarning"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_editor_earnings_currency"
+                android:textColor="@color/colorTextEditorEarning"
+                android:layout_alignParentRight="true"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/tv_currency" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_editor_earning_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_editor_earnings_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_editor_earnings_date"
+            android:textColor="@color/colorTextEditorEarning"
+            android:paddingBottom="8dp"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <!-- TODO Change to DatePicker when time left-->
+            <EditText
+                android:id="@+id/et_editor_earnings_date"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:inputType="date"
+                android:layout_alignParentRight="true"
+                android:hint="@string/hint_editor_earnings_date"
+                android:textColor="@color/colorTextEditorEarning"
+                android:paddingBottom="8dp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!--
+    <LinearLayout
+        android:id="@+id/container_editor_earnings_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_editor_earnings_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/editor_earnings_description"
+            android:textColor="@color/colorTextEditorEarning"
+            android:paddingBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/et_editor_earnings_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:gravity="top|left"
+            android:hint="@string/hint_editor_earnings_description"
+            android:textColor="@color/colorTextEditorEarning"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+    -->
+
+</LinearLayout>

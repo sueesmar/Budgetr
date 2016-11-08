@@ -2,10 +2,13 @@
     <string name="app_name">Budgetr</string>
     <string name="password">Password</string>
     <string name="email">E-mail</string>
+    <string name="label_activity_balance_overview">Balance Overview</string>
+    <string name="label_activity_list_earnings">My Earnings</string>
+    <string name="label_activity_list_expenditures">My Expenditures</string>
 
     <string name="SpentThisMonth">Spent this month</string>
     <string name="EarnedThisMonth">Earned this month</string>
-    <string name="ActualBalance">Actual Balance</string>
+    <string name="ActualBalance">Money left this month</string>
     <string name="btn_show_earnings">My Earnings</string>
     <string name="btn_show_expenditures">My Expenditures</string>
 
@@ -32,7 +35,14 @@
     <string name="tv_editor_expenditures_date">Date</string>
     <string name="tv_editor_expenditures_place">Place</string>
     <string name="hint_editor_expenditures_place">Where you spent your money?</string>
-    <string name="hint_editor_expenditures_date">When you spent your money?</string>
+    <string name="hint_editor_expenditures_date">DD/MM/YY</string>
+
+    <!-- activity_editor_earnings.xml -->
+    <string name="editor_earnings_description">Description</string>
+    <string name="hint_editor_earnings_description">What you get money for?</string>
+    <string name="tv_editor_earnings_salarymount">Amount</string>
+    <string name="tv_editor_earnings_date">Date</string>
+    <string name="hint_editor_earnings_date">DD/MM/YY</string>
 
     <string name="editor_expenditures_activity_title_new_expenditure">Add new expenditure</string>
     <string name="editor_expenditures_activity_title_edit_expenditure">Edit expenditure</string>
@@ -48,4 +58,14 @@
     <string name="cancel">Cancel</string>
     <string name="editor_expenditures_delete_expenditure_failed">Deleting expenditure failed!</string>
     <string name="editor_expenditures_delete_expenditure_successful">Expenditure deleted successfully!</string>
+
+    <string name="editor_earnings_activity_title_new_earning">Add new earning</string>
+    <string name="editor_earnings_activity_title_edit_earning">Edit earning</string>
+    <string name="editor_earnings_insert_earning_failed">Earning can\'t be added because of error!</string>
+    <string name="editor_earnings_insert_earning_successful">Earning added successfully!</string>
+    <string name="editor_earnings_update_earning_failed">Earning can\'t be updated because of error!</string>
+    <string name="editor_earnings_update_earning_successful">Earning updated successfully!</string>
+    <string name="editor_earnings_delete_earning_failed">Deleting earning failed!</string>
+    <string name="editor_earnings_delete_earning_successful">Earning deleted successfully!</string>
+
 </resources>

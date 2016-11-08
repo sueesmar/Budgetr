@@ -23,7 +23,7 @@ import android.widget.Toast;
 import ch.msengineering.budgetr.data.BudgetrContract;
 
 /**
- * Allows user to create a new pet or edit an existing one.
+ * Allows user to create a new expenditure or edit an existing one.
  */
 public class EditorExpendituresActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
@@ -93,7 +93,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             setTitle(getString(R.string.editor_expenditures_activity_title_new_expenditure));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make sense to delete a pet that hasn't been created yet.)
+            // (It doesn't make sense to delete a expenditure that hasn't been created yet.)
             invalidateOptionsMenu();
         } else {
             // Otherwise this is an existing expenditure, so change app bar to say "Edit Expenditure"
@@ -220,7 +220,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                // Save pet to database
+                // Save expenditure to database
                 saveExpenditure();
                 // Exit activity
                 finish();
@@ -232,7 +232,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
-                // If the pet hasn't changed, continue with navigating up to parent activity
+                // If the expenditure hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.
                 if (!mExpenditureHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditorExpendituresActivity.this);
@@ -314,7 +314,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         // Proceed with moving to the first row of the cursor and reading data from it
         // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
-            // Find the columns of pet attributes that we're interested in
+            // Find the columns of expenditure attributes that we're interested in
             int amountColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT);
             int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE);
             int placeColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE);
@@ -327,7 +327,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             String description = cursor.getString(descriptionColumnIndex);
 
             // Update the views on the screen with the values from the database
-            mAmountEditText.setText(Float.toString(amount));
+            mAmountEditText.setText(String.format("%1$.2f",amount));
             mDateEditText.setText(date);
             mPlaceEditText.setText(place);
             mDescriptionEditText.setText(description);
@@ -360,7 +360,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Keep editing" button, so dismiss the dialog
-                // and continue editing the pet.
+                // and continue editing the expenditure.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -407,9 +407,9 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
     private void deleteExpenditure() {
         // Only perform the delete if this is an existing expenditure.
         if (mCurrentExpenditureUri != null) {
-            // Call the ContentResolver to delete the pet at the given content URI.
-            // Pass in null for the selection and selection args because the mCurrentPetUri
-            // content URI already identifies the pet that we want.
+            // Call the ContentResolver to delete the expenditure at the given content URI.
+            // Pass in null for the selection and selection args because the mCurrentExpenditureUri
+            // content URI already identifies the expenditure that we want.
             int rowsDeleted = getContentResolver().delete(mCurrentExpenditureUri, null, null);
 
             // Show a toast message depending on whether or not the delete was successful.

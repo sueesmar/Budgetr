@@ -130,6 +130,7 @@ public class BudgetrProvider extends ContentProvider {
                 // Cursor containing that row of the table.
                 cursor = database.query(BudgetrContract.SalaryEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
+                break;
             case EXPENDITURES:
                 cursor = database.query(BudgetrContract.ExpenditureEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
@@ -199,7 +200,7 @@ public class BudgetrProvider extends ContentProvider {
             return null;
         }
 
-        // Notify all listeners that the data has changed for the pet content URI
+        // Notify all listeners that the data has changed for the user content URI
         getContext().getContentResolver().notifyChange(uri, null);
 
         // Return the new URI with the ID (of the newly inserted row) appended at the end
@@ -224,7 +225,7 @@ public class BudgetrProvider extends ContentProvider {
             return null;
         }
 
-        // Notify all listeners that the data has changed for the pet content URI
+        // Notify all listeners that the data has changed for the earning content URI
         getContext().getContentResolver().notifyChange(uri, null);
 
         // Return the new URI with the ID (of the newly inserted row) appended at the end
@@ -241,7 +242,7 @@ public class BudgetrProvider extends ContentProvider {
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        // Insert the new earning with the given values
+        // Insert the new expenditure with the given values
         long id = database.insert(BudgetrContract.ExpenditureEntry.TABLE_NAME, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
@@ -249,7 +250,7 @@ public class BudgetrProvider extends ContentProvider {
             return null;
         }
 
-        // Notify all listeners that the data has changed for the pet content URI
+        // Notify all listeners that the data has changed for the expenditure content URI
         getContext().getContentResolver().notifyChange(uri, null);
 
         // Return the new URI with the ID (of the newly inserted row) appended at the end
