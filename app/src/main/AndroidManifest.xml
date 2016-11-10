@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
+    <uses-feature android:name="android.hardware.Camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera2" android:required="true" />
+
+
 
     <!-- TODO Change Logo in Launcher -->
     <!-- TODO Disable ActionBar in LoginActivity, RegisterActivity and MainActivity -->

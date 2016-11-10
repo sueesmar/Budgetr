@@ -147,4 +147,16 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/bCamera"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txAllRightReserved"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/signinbutton"
+        android:onClick="onClickTakePicture"
+        android:text="Take receipt picture"
+        android:textColor="#ffffff" />
+
 </LinearLayout>
