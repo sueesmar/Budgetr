@@ -23,6 +23,7 @@ import android.content.ContentProviderClient;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.content.SyncResult;
 import android.database.Cursor;
@@ -30,8 +31,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -43,6 +55,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import ch.msengineering.budgetr.LoginActivity;
+import ch.msengineering.budgetr.LoginRequest;
 
 /**
  * Define a sync adapter for the app.
@@ -62,7 +77,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
      * <p>This points to the Android Developers Blog. (Side note: We highly recommend reading the
      * Android Developer Blog to stay up to date on the latest Android platform developments!)
      */
-    private static final String FEED_URL = "http://android-developers.blogspot.com/atom.xml";
+    private static final String REQUEST_URL = "http://whitehat.ch/Register.php"; //"http://192.168.10.109/budgetr/";
 
     /**
      * Network connection timeout, in milliseconds.
@@ -91,13 +106,6 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
             BudgetrContract.ExpenditureEntry.COLUMN_NAME_RECEIPT,
             BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE};
 
-    // Constants representing column positions from PROJECTION.
-//    public static final int COLUMN_ID = 0;
-//    public static final int COLUMN_ENTRY_ID = 1;
-//    public static final int COLUMN_TITLE = 2;
-//    public static final int COLUMN_LINK = 3;
-//    public static final int COLUMN_PUBLISHED = 4;
-
     /**
      * Constructor. Obtains handle to content resolver for later use.
      */
@@ -113,6 +121,100 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     public SyncAdapter(Context context, boolean autoInitialize, boolean allowParallelSyncs) {
         super(context, autoInitialize, allowParallelSyncs);
         mContentResolver = context.getContentResolver();
+    }
+
+    public void sendDataToServer(final JSONArray localDataArray) {
+
+        // Response received from the server
+        Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                    Log.i(TAG,"Request: " + localDataArray.toString());
+                    Log.i(TAG,"Response: "+ response.toString());
+//                    boolean success = jsonResponse.getBoolean("success");
+//
+//                    if (success) {
+//                        String name = jsonResponse.getString("name");
+//                        String email = jsonResponse.getString("email");
+//
+//                        //Code when response is successful
+//
+//
+//                    } else {
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+//                        builder.setMessage("Login Failed")
+//                                .setNegativeButton("Retry", null)
+//                                .create()
+//                                .show();
+//                    }
+
+
+            }
+        };
+
+
+        Response.ErrorListener errorListener= new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(TAG, error.toString());
+            }
+        };
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, REQUEST_URL, localDataArray, responseListener, errorListener);
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        queue.add(jsonArrayRequest);
+    }
+
+    /***
+     * Gets the number of entries in the expenditure table of the local sqlite database.
+     * @return Number of entries.
+     */
+    public int getExpenditureCountLocalDb(){
+
+        String[] projection = {
+                BudgetrContract.ExpenditureEntry._ID,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT};
+
+        Cursor cursor = mContentResolver.query(
+                BudgetrContract.ExpenditureEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+
+        return cursor.getCount();
+    }
+
+    /***
+     * Gets the number of entries in the earnings table of the local sqlite database.
+     * @return Number of entries
+     */
+    public int getEarningsCountLocalDb(){
+
+        String[] projection = {
+                BudgetrContract.SalaryEntry._ID,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT};
+
+        Cursor cursor = mContentResolver.query(
+                BudgetrContract.SalaryEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+
+        return cursor.getCount();
     }
 
     /**
@@ -135,46 +237,77 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                               ContentProviderClient provider, SyncResult syncResult) {
         Log.i(TAG, "Beginning network synchronization");
         Log.i(TAG, "Test output for syncing.");
-//        try {
-//            final URL location = new URL(FEED_URL);
-//            InputStream stream = null;
+
+//        int countExpenditure = getExpenditureCountLocalDb();
+//        int countEarnings = getEarningsCountLocalDb();
 //
-//            try {
-//                Log.i(TAG, "Streaming data from network: " + location);
-//                stream = downloadUrl(location);
-//                updateLocalFeedData(stream, syncResult);
-//                // Makes sure that the InputStream is closed after the app is
-//                // finished using it.
-//            } finally {
-//                if (stream != null) {
-//                    stream.close();
+//        Log.i(TAG, "Expenditure: " + countExpenditure + ", Earnings: " + countEarnings);
+//
+//        //Get Expenditures from database and create jsonobject
+//        String[] projection = {
+//                BudgetrContract.ExpenditureEntry._ID,
+//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION,
+//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE,
+//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE,
+//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT};
+//
+//        Cursor cursor = mContentResolver.query(
+//                BudgetrContract.ExpenditureEntry.CONTENT_URI,
+//                projection,
+//                null,
+//                null,
+//                null
+//        );
+//
+//        cursor.moveToFirst();
+//
+//        // Find the columns of expenditure attributes that we're interested in
+//        int idColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry._ID);
+//        int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION);
+//        int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE);
+//        int placeColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE);
+//        int valueColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT);
+//
+//        // Read the expenditure attributes from the Cursor for the current expenditure
+//        int expenditureId = cursor.getInt(idColumnIndex);
+//        String expenditureDescription = cursor.getString(descriptionColumnIndex);
+//        String expenditureDate = cursor.getString(dateColumnIndex);
+//        String expenditurePlace = cursor.getString(placeColumnIndex);
+//        float expenditureValue = cursor.getFloat(valueColumnIndex);
+//
+//        JSONArray expenditureArray = new JSONArray();
+//
+//        if (cursor != null && cursor.getCount() > 0) {
+//
+////          int expenditureArrayCount = 0;
+//
+//            while (!cursor.isAfterLast()) {
+//
+//                JSONObject currentExpenditure = new JSONObject();
+//
+//                try {
+//                    currentExpenditure.put("idexpenditure", expenditureId);
+//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION, expenditureDescription);
+//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE, expenditureDate);
+//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE, expenditurePlace);
+//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT, expenditureValue);
+//
+//                    expenditureArray.put(currentExpenditure);
+//
+//                    cursor.moveToNext();
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
 //                }
 //            }
-//        } catch (MalformedURLException e) {
-//            Log.e(TAG, "Feed URL is malformed", e);
-//            syncResult.stats.numParseExceptions++;
-//            return;
-//        } catch (IOException e) {
-//            Log.e(TAG, "Error reading from network: " + e.toString());
-//            syncResult.stats.numIoExceptions++;
-//            return;
-//        } catch (XmlPullParserException e) {
-//            Log.e(TAG, "Error parsing feed: " + e.toString());
-//            syncResult.stats.numParseExceptions++;
-//            return;
-//        } catch (ParseException e) {
-//            Log.e(TAG, "Error parsing feed: " + e.toString());
-//            syncResult.stats.numParseExceptions++;
-//            return;
-//        } catch (RemoteException e) {
-//            Log.e(TAG, "Error updating database: " + e.toString());
-//            syncResult.databaseError = true;
-//            return;
-//        } catch (OperationApplicationException e) {
-//            Log.e(TAG, "Error updating database: " + e.toString());
-//            syncResult.databaseError = true;
-//            return;
 //        }
+//
+//        sendDataToServer(expenditureArray);
+//
+//        Log.i(TAG,expenditureArray.toString());
+
+
+
         Log.i(TAG, "Network synchronization complete");
     }
 
