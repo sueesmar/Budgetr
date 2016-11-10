@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import ch.msengineering.budgetr.data.BudgetrContract;
 
 public class EditorEarningsActivity extends AppCompatActivity implements
@@ -72,11 +76,18 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         mCurrentEarningUri = intent.getData();
 
+        // Find all relevant views that we will need to read user input from
+        mSalarymountEditText = (EditText) findViewById(R.id.et_editor_earnings_salarymount);
+        mDateEditText = (EditText) findViewById(R.id.et_editor_earnings_date);
+
         // If the intent DOES NOT contain a earning content URI, then we know that we are
         // creating a new earning.
         if (mCurrentEarningUri == null) {
             // This is a new earning, so change the app bar to say "Add a Earning"
             setTitle(getString(R.string.editor_earnings_activity_title_new_earning));
+
+            //Set actual date as default
+            mDateEditText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a earning that hasn't been created yet.)
@@ -90,9 +101,6 @@ public class EditorEarningsActivity extends AppCompatActivity implements
             getLoaderManager().initLoader(EXISTING_EARNINGS_LOADER, null, this);
         }
 
-        // Find all relevant views that we will need to read user input from
-        mSalarymountEditText = (EditText) findViewById(R.id.et_editor_earnings_salarymount);
-        mDateEditText = (EditText) findViewById(R.id.et_editor_earnings_date);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -124,10 +132,10 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE, dateString);
         // If the amount is not provided by the user, don't try to parse the string into an
-        // float value. Use 0 by default.
-        float amount = 0;
+        // double value. Use 0 by default.
+        double amount = 0;
         if (!TextUtils.isEmpty(salarymountString)) {
-            amount = Float.parseFloat(salarymountString);
+            amount = Double.parseDouble(salarymountString);
         }
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT, amount);
 
@@ -293,12 +301,12 @@ public class EditorEarningsActivity extends AppCompatActivity implements
             int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE);
 
             // Extract out the value from the Cursor for the given column index
-            float amount = cursor.getFloat(amountColumnIndex);
+            double amount = cursor.getDouble(amountColumnIndex);
             String date = cursor.getString(dateColumnIndex);
 
 
             // Update the views on the screen with the values from the database
-            mSalarymountEditText.setText(String.format("%1$.2f",amount));
+            mSalarymountEditText.setText(String.format(Locale.US,"%1$.2f",amount));
             mDateEditText.setText(date);
         }
     }

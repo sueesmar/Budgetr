@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import ch.msengineering.budgetr.data.BudgetrContract;
 
 /**
@@ -86,11 +90,20 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         mCurrentExpenditureUri = intent.getData();
 
+        // Find all relevant views that we will need to read user input from
+        mAmountEditText = (EditText) findViewById(R.id.et_editor_expenditures_amount);
+        mDateEditText = (EditText) findViewById(R.id.et_editor_expenditures_date);
+        mPlaceEditText = (EditText) findViewById(R.id.et_editor_expenditures_place);
+        mDescriptionEditText = (EditText) findViewById(R.id.et_editor_expenditures_description);
+
         // If the intent DOES NOT contain a expenditure content URI, then we know that we are
         // creating a new expenditure.
         if (mCurrentExpenditureUri == null) {
             // This is a new expenditure, so change the app bar to say "Add a Expenditure"
             setTitle(getString(R.string.editor_expenditures_activity_title_new_expenditure));
+
+            //Set actual date as default
+            mDateEditText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a expenditure that hasn't been created yet.)
@@ -104,11 +117,6 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             getLoaderManager().initLoader(EXISTING_EXPENDITURE_LOADER, null, this);
         }
 
-        // Find all relevant views that we will need to read user input from
-        mAmountEditText = (EditText) findViewById(R.id.et_editor_expenditures_amount);
-        mDateEditText = (EditText) findViewById(R.id.et_editor_expenditures_date);
-        mPlaceEditText = (EditText) findViewById(R.id.et_editor_expenditures_place);
-        mDescriptionEditText = (EditText) findViewById(R.id.et_editor_expenditures_description);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -148,10 +156,10 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE, placeString);
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION, descriptionString);
         // If the amount is not provided by the user, don't try to parse the string into an
-        // float value. Use 0 by default.
-        float amount = 0;
+        // double value. Use 0 by default.
+        double amount = 0;
         if (!TextUtils.isEmpty(amountString)) {
-            amount = Float.parseFloat(amountString);
+            amount = Double.parseDouble(amountString);
         }
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT, amount);
 
@@ -321,13 +329,13 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION);
 
             // Extract out the value from the Cursor for the given column index
-            float amount = cursor.getFloat(amountColumnIndex);
+            double amount = cursor.getDouble(amountColumnIndex);
             String date = cursor.getString(dateColumnIndex);
             String place = cursor.getString(placeColumnIndex);
             String description = cursor.getString(descriptionColumnIndex);
 
             // Update the views on the screen with the values from the database
-            mAmountEditText.setText(String.format("%1$.2f",amount));
+            mAmountEditText.setText(String.format(Locale.US,"%1$.2f",amount));
             mDateEditText.setText(date);
             mPlaceEditText.setText(place);
             mDescriptionEditText.setText(description);

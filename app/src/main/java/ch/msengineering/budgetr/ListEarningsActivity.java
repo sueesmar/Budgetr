@@ -93,7 +93,7 @@ public class ListEarningsActivity extends AppCompatActivity implements
         // and attributes are the values.
         ContentValues values = new ContentValues();
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT, 100.00);
-        values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE, new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(new Date()));
+        values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_USER_ID, 1);
 
         // Insert a new row into the provider using the ContentResolver.
