@@ -72,12 +72,24 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     public static final String TAG = "SyncAdapter";
 
     /**
-     * URL to fetch content from during a sync.
-     *
-     * <p>This points to the Android Developers Blog. (Side note: We highly recommend reading the
-     * Android Developer Blog to stay up to date on the latest Android platform developments!)
+     * URL to send expenditure to during a sync.
      */
-    private static final String REQUEST_URL = "http://whitehat.ch/Register.php"; //"http://192.168.10.109/budgetr/";
+    private static final String REQUEST_URL_SAVE_EXPENDITURE = "http://192.168.10.109/budgetr/SaveExpenditure.php";
+
+    /**
+     * URL to send salary to during a sync.
+     */
+    private static final String REQUEST_URL_SAVE_SALARY =  "http://192.168.10.109/budgetr/SaveSalary.php";
+
+    /**
+     * URL to request element count of expenditure during a sync.
+     */
+    private static final String REQUEST_URL_GET_COUNT_EXPENDITURE =  "http://192.168.10.109/budgetr/GetCountExpenditure.php";
+
+    /**
+     * URL to request element count of salary during a sync.
+     */
+    private static final String REQUEST_URL_GET_COUNT_SALARY =  "http://192.168.10.109/budgetr/GetCountSalary.php";
 
     /**
      * Network connection timeout, in milliseconds.
@@ -123,34 +135,44 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         mContentResolver = context.getContentResolver();
     }
 
-    public void sendDataToServer(final JSONArray localDataArray) {
+    /***
+     * Send the local table data to web-interface, which stores each element on the MySQL-Table.
+     * @param localDataArray {@link JSONArray} with all the local table elements.
+     * @param requestURL URL to send request to, depending if sending expenditure or earnings.
+     */
+    public void sendDataToServer(final JSONArray localDataArray, String requestURL) {
 
         // Response received from the server
         Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONArray jsonResponse) {
 
+                Log.i(TAG,"Request: " + localDataArray.toString());
+                Log.i(TAG,"Response: "+ jsonResponse.toString());
 
-                    Log.i(TAG,"Request: " + localDataArray.toString());
-                    Log.i(TAG,"Response: "+ response.toString());
-//                    boolean success = jsonResponse.getBoolean("success");
-//
-//                    if (success) {
-//                        String name = jsonResponse.getString("name");
-//                        String email = jsonResponse.getString("email");
-//
-//                        //Code when response is successful
-//
-//
-//                    } else {
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-//                        builder.setMessage("Login Failed")
-//                                .setNegativeButton("Retry", null)
-//                                .create()
-//                                .show();
-//                    }
+                try {
+                    boolean success = jsonResponse.getJSONObject(0).getBoolean("success");
 
+                    if (success) {
+                        Log.i(TAG, "Response, successfull");
 
+                        //Code when response is successfull, till now > nothing.
+
+                    } else {
+                        //TODO Dialog for sync-Problem.
+                        /*
+                         * Handling of Error in Sync-Problem, but not working yet.
+                         *
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage("Sync failed")
+                                .setNegativeButton("OK", null)
+                                .create()
+                                .show();
+                        */
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         };
 
@@ -162,9 +184,53 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
             }
         };
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, REQUEST_URL, localDataArray, responseListener, errorListener);
+        //Create the request, send it to the specified URL and get die answer.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, requestURL, localDataArray, responseListener, errorListener);
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(jsonArrayRequest);
+    }
+
+    /***
+     * Gets the number of elements of the requested table from the remote database.
+     * @param requestURL URL to the web-interface for the requested table.
+     * @return Number of elements in table.
+     */
+    public void getElementCountRemoteDb(final RemoteServerCallback callback, String requestURL){
+
+        final int[] countRemoteDb = new int[1];
+
+        // Response received from the server
+        Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray jsonResponse) {
+
+                try {
+                    countRemoteDb[0] = jsonResponse.getJSONObject(0).getInt("count");
+                    callback.onSuccess(countRemoteDb[0]);
+                    //Log.i(TAG, "Count on Remote DB: " + countRemoteDb[0]);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+
+        Response.ErrorListener errorListener= new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(TAG, error.toString());
+            }
+        };
+
+        //Create the request, send it to the specified URL and get die answer.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, requestURL, null, responseListener, errorListener);
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        queue.add(jsonArrayRequest);
+    }
+
+    public interface RemoteServerCallback{
+        void onSuccess(int result);
     }
 
     /***
@@ -217,6 +283,148 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         return cursor.getCount();
     }
 
+    /***
+     * Read all data from expenditureTable and create {@link JSONArray}.
+     * @return All data in one {@link JSONArray}
+     */
+    public JSONArray getExpenditureTableInJsonArray(){
+
+        String[] projection = {
+                BudgetrContract.ExpenditureEntry._ID,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT};
+
+        Cursor cursor = mContentResolver.query(
+                BudgetrContract.ExpenditureEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+
+        // Find the columns of expenditure attributes that we're interested in
+        int idColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry._ID);
+        int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION);
+        int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE);
+        int placeColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE);
+        int valueColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT);
+
+        // Variables for sending to server
+        int expenditureId;
+        String expenditureDescription;
+        String expenditureDate;
+        String expenditurePlace;
+        double expenditureValue;
+
+        JSONArray expenditureArray = new JSONArray();
+
+        if (cursor != null && cursor.getCount() > 0) {
+
+            while (!cursor.isAfterLast()) {
+
+                // Read the expenditure attributes from the Cursor for the current expenditure
+                expenditureId = cursor.getInt(idColumnIndex);
+                expenditureDescription = cursor.getString(descriptionColumnIndex);
+                expenditureDate = cursor.getString(dateColumnIndex);
+                expenditurePlace = cursor.getString(placeColumnIndex);
+                expenditureValue = cursor.getDouble(valueColumnIndex);
+
+                JSONObject currentExpenditure = new JSONObject();
+
+                try {
+                    currentExpenditure.put("idexpenditure", expenditureId);
+                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION, expenditureDescription);
+                    currentExpenditure.put("expenditureDate", expenditureDate);
+                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE, expenditurePlace);
+                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT, expenditureValue);
+
+                    //Add the values of the current JSONObject to the JSONArray
+                    expenditureArray.put(currentExpenditure);
+
+                    cursor.moveToNext();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        cursor.close();
+
+        return expenditureArray;
+    }
+
+    /***
+     * Read all data from salaryTable and create {@link JSONArray}.
+     * @return All data in one {@link JSONArray}
+     */
+    public JSONArray getEarningsTableInJsonArray(){
+
+        String[] projection = {
+                BudgetrContract.SalaryEntry._ID,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE};
+
+        Cursor cursor = mContentResolver.query(
+                BudgetrContract.SalaryEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+
+        // Find the columns of expenditure attributes that we're interested in
+        int idColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry._ID);
+        int valueColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT);
+        int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE);
+
+        // Variables for sending to server
+        int salaryId;
+        String salaryDate;
+        double salaryValue;
+
+        JSONArray earningArray = new JSONArray();
+
+        if (cursor != null && cursor.getCount() > 0) {
+
+            while (!cursor.isAfterLast()) {
+
+                // Read the expenditure attributes from the Cursor for the current expenditure
+                salaryId = cursor.getInt(idColumnIndex);
+                salaryDate = cursor.getString(dateColumnIndex);
+                salaryValue = cursor.getDouble(valueColumnIndex);
+
+                JSONObject currentEarning = new JSONObject();
+
+                try {
+                    currentEarning.put("idsalary", salaryId);
+                    currentEarning.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE, salaryDate);
+                    currentEarning.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT, salaryValue);
+
+                    //Add the values of the current JSONObject to the JSONArray
+                    earningArray.put(currentEarning);
+
+                    cursor.moveToNext();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        cursor.close();
+
+        Log.i(TAG, "EarningArray: "+ earningArray.toString());
+
+        return earningArray;
+    }
+
     /**
      * Called by the Android system in response to a request to run the sync adapter. The work
      * required to read data from the network, parse it, and store it in the content provider is
@@ -238,73 +446,43 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.i(TAG, "Beginning network synchronization");
         Log.i(TAG, "Test output for syncing.");
 
-//        int countExpenditure = getExpenditureCountLocalDb();
-//        int countEarnings = getEarningsCountLocalDb();
+//        int countLocalExpenditures = getExpenditureCountLocalDb();
+//        int countLocalEarnings = getEarningsCountLocalDb();
 //
-//        Log.i(TAG, "Expenditure: " + countExpenditure + ", Earnings: " + countEarnings);
+//        Log.i(TAG, "Expenditure local: " + countLocalExpenditures + ", Earnings  local: " + countLocalEarnings);
 //
-//        //Get Expenditures from database and create jsonobject
-//        String[] projection = {
-//                BudgetrContract.ExpenditureEntry._ID,
-//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION,
-//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE,
-//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE,
-//                BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT};
-//
-//        Cursor cursor = mContentResolver.query(
-//                BudgetrContract.ExpenditureEntry.CONTENT_URI,
-//                projection,
-//                null,
-//                null,
-//                null
-//        );
-//
-//        cursor.moveToFirst();
-//
-//        // Find the columns of expenditure attributes that we're interested in
-//        int idColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry._ID);
-//        int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION);
-//        int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE);
-//        int placeColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE);
-//        int valueColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT);
-//
-//        // Read the expenditure attributes from the Cursor for the current expenditure
-//        int expenditureId = cursor.getInt(idColumnIndex);
-//        String expenditureDescription = cursor.getString(descriptionColumnIndex);
-//        String expenditureDate = cursor.getString(dateColumnIndex);
-//        String expenditurePlace = cursor.getString(placeColumnIndex);
-//        float expenditureValue = cursor.getFloat(valueColumnIndex);
-//
-//        JSONArray expenditureArray = new JSONArray();
-//
-//        if (cursor != null && cursor.getCount() > 0) {
-//
-////          int expenditureArrayCount = 0;
-//
-//            while (!cursor.isAfterLast()) {
-//
-//                JSONObject currentExpenditure = new JSONObject();
-//
-//                try {
-//                    currentExpenditure.put("idexpenditure", expenditureId);
-//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION, expenditureDescription);
-//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE, expenditureDate);
-//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE, expenditurePlace);
-//                    currentExpenditure.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT, expenditureValue);
-//
-//                    expenditureArray.put(currentExpenditure);
-//
-//                    cursor.moveToNext();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+//        final int countRemoteExpenditures[] = new int[1];
+//        getElementCountRemoteDb(new RemoteServerCallback() {
+//            @Override
+//            public void onSuccess(int result) {
+//                countRemoteExpenditures[0] = result;
 //            }
+//        }, REQUEST_URL_GET_COUNT_EXPENDITURE);
+//
+//        final int countRemoteEarnings[] = new int[1];
+//        getElementCountRemoteDb(new RemoteServerCallback() {
+//            @Override
+//            public void onSuccess(int result) {
+//                countRemoteEarnings[0] = result;
+//                Log.i(TAG, "Expenditure remote: " + countRemoteExpenditures[0] + ", Earnings remote: " + countRemoteEarnings[0]);
+//            }
+//        }, REQUEST_URL_GET_COUNT_SALARY);
+//
+//
+//        //send data to server if count is not equal
+//        if(countLocalEarnings != countRemoteEarnings[0]){
+//            //All earning elements from local database in JSONArray
+//            JSONArray earningArray = getEarningsTableInJsonArray();
+//
+//            sendDataToServer(earningArray, REQUEST_URL_SAVE_SALARY);
 //        }
 //
-//        sendDataToServer(expenditureArray);
+//        if(countLocalExpenditures != countRemoteExpenditures[0]) {
+//            //All expenditure elements from local database in JSONArray
+//            JSONArray expenditureArray = getExpenditureTableInJsonArray();
 //
-//        Log.i(TAG,expenditureArray.toString());
+//            sendDataToServer(expenditureArray, REQUEST_URL_SAVE_EXPENDITURE);
+//        }
 
 
 

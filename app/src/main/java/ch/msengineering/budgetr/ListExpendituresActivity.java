@@ -93,7 +93,7 @@ public class ListExpendituresActivity extends AppCompatActivity implements
         // and attributes are the values.
         ContentValues values = new ContentValues();
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION, "Food");
-        values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE, new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(new Date()));
+        values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_USER_ID, 1);
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT, 20.55);
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE, "Migros");
