@@ -65,12 +65,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/LinearLayout3_horizontal">
 
-
         <ImageView
             android:layout_width="32dp"
             android:layout_height="39dp"
             android:src="@drawable/icon_lock" />
 
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="#ffffff"  />
 
         <EditText
             android:layout_width="match_parent"
@@ -81,65 +87,51 @@
             android:hint="Name"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="166dp"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="#ffffff"  />
-
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="288dp"
-        android:layout_height="44dp"><![CDATA[
-        android:id="@+id/LinearLayout4_horizontal">
-
-    ]]></LinearLayout>
+    <Button
+        android:id="@+id/bRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/signinbutton"
+        android:onClick="onClickSignup"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:text="Sign up"
+        android:textSize="18dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="114dp"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:id="@+id/RelativLayout1">
 
 
         <Button
             android:id="@+id/bBackToMain"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/txAllRightReserved"
-
-            android:layout_centerHorizontal="true"
             android:background="@drawable/signinbutton"
             android:onClick="onClickSignup"
             android:text=" Back"
-            android:textColor="#ffffff" />
-
-        <Button
-            android:id="@+id/bRegister"
-            android:layout_width="319dp"
-            android:layout_height="38dp"
-            android:layout_gravity="center"
-            android:background="#ffffff"
-            android:text="Register >"
-            android:textSize="18dp"
-            android:layout_above="@+id/bBackToMain"
+            android:textColor="#ffffff"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginTop="18dp" />
+
+        <TextView
+            android:id="@+id/txAllRightReserved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="© All Rights Reserved. Budgetr 2016."
+            android:textColor="#ffffff"
+            android:layout_marginBottom="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/txAllRightReserved"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="© All Rights Reserved. Budgetr 2016."
-        android:textColor="#ffffff" />
 
 
 </LinearLayout>

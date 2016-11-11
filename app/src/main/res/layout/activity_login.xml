@@ -15,8 +15,7 @@
         android:layout_width="72dp"
         android:layout_height="78dp"
         android:layout_gravity="center"
-        android:src="@drawable/logobudgetr"
-        />
+        android:src="@drawable/logobudgetr" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/LinearLayout2_horizontal">
+        android:id="@+id/LinearLayout2_horizontal" >
 
         <ImageView
             android:layout_width="33dp"
@@ -49,18 +48,17 @@
             android:textColor="#ffffff"
 
             android:layout_width="fill_parent" />
-</LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/LinearLayout3_horizontal">
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayout3_horizontal">
 
         <ImageView
             android:layout_width="32dp"
             android:layout_height="39dp"
             android:src="@drawable/icon_lock" />
-
 
         <EditText
             android:id="@+id/etPassword"
@@ -68,19 +66,19 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="#ffffff"
+            android:textColor="#ffffff" />
+    </LinearLayout>
 
-            />
-        </LinearLayout>
     <Button
         android:id="@+id/bLogin"
-        android:layout_width="319dp"
-        android:layout_height="38dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/signinbutton"
+        android:onClick="onClickSignup"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="5dp"
-        android:background="#ffffff"
-        android:text="Login >"
+        android:text="Login"
         android:textSize="18dp" />
 
 
@@ -91,26 +89,28 @@
         android:id="@+id/RelativLayout1">
 
 
+        <Button
+            android:id="@+id/bBackToMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:background="@drawable/signinbutton"
+            android:onClick="onClickSignup"
+            android:text=" Back"
+            android:textColor="#ffffff"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp" />
+
         <TextView
             android:id="@+id/txAllRightReserved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:text="© All Rights Reserved. Budgetr 2016."
-            android:textColor="#ffffff" />
-
-        <Button
-            android:id="@+id/bBackToMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/txAllRightReserved"
-
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/signinbutton"
-            android:onClick="onClickSignup"
-            android:text=" Back"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:layout_marginBottom="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
