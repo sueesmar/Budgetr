@@ -39,15 +39,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.mcxiaoke.volley/library-aar/1.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e40b9a81989bd4a846018551c280f8c4d837bf2e">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.mcxiaoke.volley-library-aar-1.0.0_2ff97c92beef81bc29e7a4c8d32ce1cd94215c40/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -70,7 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="08c76cd2271ca25e6af72cc55252f8dd690b28bc">
+        sha1="81a18b4f3ee22f07c05c3bc946fa3b8129b81519">
         <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_c4b29743006fd5a48eb908fe13ad79e83f23c656/classes.dex" />
     </item>
     <item
@@ -147,11 +138,20 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.volley-volley-1.0.0_ec4c039f459351715ad285cc49fc29550411da2f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="9d05e18bfff809b387e308f55395c5c9e1a11a77">
+        sha1="16d185e40a16bae34d7a32b845332a661d8704fd">
         <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f03f526864306fd5bbcd1c6eb9fe43acbaee635d/classes.dex" />
     </item>
     <item
