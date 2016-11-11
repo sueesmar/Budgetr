@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2FDD86"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    tools:context="ch.msengineering.budgetr.LoginActivity">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="78dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logobudgetr" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:text="Capture a picture of your receipt"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:id="@+id/tvCapturePicutreReceipt" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/LinearLayout2_horizontal" >
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/RelativLayout1">
+
+        <ImageView android:id="@+id/imgPicture"
+            android:layout_height="wrap_content"
+            android:src="@drawable/signinbutton"
+            android:layout_width="wrap_content">
+        </ImageView>
+
+
+        <Button
+            android:id="@+id/bCapture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/signinbutton"
+            android:onClick="onClickSignup"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="200dp"
+            android:text="Capture receipt picture"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/bBackToMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:background="@drawable/signinbutton"
+            android:onClick="onClickSignup"
+            android:text=" Back"
+            android:textColor="#ffffff"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="260dp" />
+
+        <TextView
+            android:id="@+id/txAllRightReserved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="© All Rights Reserved. Budgetr 2016."
+            android:textColor="#ffffff"
+            android:layout_marginBottom="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+
