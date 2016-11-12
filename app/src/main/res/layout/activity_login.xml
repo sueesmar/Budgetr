@@ -16,6 +16,7 @@
         android:layout_height="78dp"
         android:layout_gravity="center"
         android:src="@drawable/logobudgetr" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,6 +74,7 @@
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_gravity="center"
         android:background="@drawable/signinbutton"
         android:onClick="onClickSignup"
@@ -93,14 +95,15 @@
             android:id="@+id/bBackToMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:textAlignment="center"
             android:background="@drawable/signinbutton"
             android:onClick="onClickSignup"
             android:text=" Back"
             android:textColor="#ffffff"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/txAllRightReserved"
