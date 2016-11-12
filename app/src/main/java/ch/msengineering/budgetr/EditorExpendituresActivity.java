@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -62,6 +63,11 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
      */
     private EditText mDescriptionEditText;
 
+    /**
+     * Button to capture receipt
+     */
+    private Button mCameraButton;
+
 
     /**
      * Boolean flag that keeps track of whether the expenditure has been edited (true) or not (false)
@@ -95,6 +101,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         mDateEditText = (EditText) findViewById(R.id.et_editor_expenditures_date);
         mPlaceEditText = (EditText) findViewById(R.id.et_editor_expenditures_place);
         mDescriptionEditText = (EditText) findViewById(R.id.et_editor_expenditures_description);
+        mCameraButton = (Button) findViewById(R.id.bCamera);
 
         // If the intent DOES NOT contain a expenditure content URI, then we know that we are
         // creating a new expenditure.
@@ -125,6 +132,15 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         mDateEditText.setOnTouchListener(mTouchListener);
         mPlaceEditText.setOnTouchListener(mTouchListener);
         mDescriptionEditText.setOnTouchListener(mTouchListener);
+
+        mCameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent camearaIntent = new Intent(getApplicationContext(), CameraActivity.class);
+                startActivity(camearaIntent);
+
+            }
+        });
 
     }
 

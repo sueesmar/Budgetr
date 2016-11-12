@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2FDD86"
     android:orientation="vertical"
+    android:paddingTop="16dp"
     android:paddingBottom="5dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -114,7 +115,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/signinbutton"
-            android:onClick="onClickSignup"
             android:text=" Back"
             android:textColor="#ffffff"
             android:layout_alignParentTop="true"
@@ -127,7 +127,6 @@
             android:layout_height="wrap_content"
             android:text="© All Rights Reserved. Budgetr 2016."
             android:textColor="#ffffff"
-            android:layout_marginBottom="45dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 

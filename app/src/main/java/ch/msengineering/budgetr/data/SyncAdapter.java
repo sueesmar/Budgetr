@@ -39,6 +39,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -72,24 +73,40 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     public static final String TAG = "SyncAdapter";
 
     /**
+     * URL for base directory of remote DB-Server
+     */
+//    private static final String BASE_URL_REMOTE_SERVER = "http://192.168.10.109/budgetr/";
+    private static final String BASE_URL_REMOTE_SERVER = "http://whitehat.ch/";
+
+    /**
      * URL to send expenditure to during a sync.
      */
-    private static final String REQUEST_URL_SAVE_EXPENDITURE = "http://192.168.10.109/budgetr/SaveExpenditure.php";
+    private static final String REQUEST_URL_SAVE_EXPENDITURE = BASE_URL_REMOTE_SERVER + "SaveExpenditure.php";
 
     /**
      * URL to send salary to during a sync.
      */
-    private static final String REQUEST_URL_SAVE_SALARY =  "http://192.168.10.109/budgetr/SaveSalary.php";
+    private static final String REQUEST_URL_SAVE_SALARY =  BASE_URL_REMOTE_SERVER + "SaveSalary.php";
 
     /**
      * URL to request element count of expenditure during a sync.
      */
-    private static final String REQUEST_URL_GET_COUNT_EXPENDITURE =  "http://192.168.10.109/budgetr/GetCountExpenditure.php";
+    private static final String REQUEST_URL_GET_COUNT_EXPENDITURE =  BASE_URL_REMOTE_SERVER + "GetCountExpenditure.php";
 
     /**
      * URL to request element count of salary during a sync.
      */
-    private static final String REQUEST_URL_GET_COUNT_SALARY =  "http://192.168.10.109/budgetr/GetCountSalary.php";
+    private static final String REQUEST_URL_GET_COUNT_SALARY =  BASE_URL_REMOTE_SERVER + "GetCountSalary.php";
+
+    /**
+     * URL to request element count of salary during a sync.
+     */
+    private static final String REQUEST_URL_DELETE_SALARY =  BASE_URL_REMOTE_SERVER + "DeleteSalary.php";
+
+    /**
+     * URL to request element count of salary during a sync.
+     */
+    private static final String REQUEST_URL_DELETE_EXPENDITURE =  BASE_URL_REMOTE_SERVER + "DeleteExpenditure.php";
 
     /**
      * Network connection timeout, in milliseconds.
@@ -176,7 +193,6 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
             }
         };
 
-
         Response.ErrorListener errorListener= new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -186,6 +202,55 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         //Create the request, send it to the specified URL and get die answer.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, requestURL, localDataArray, responseListener, errorListener);
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        queue.add(jsonArrayRequest);
+    }
+
+    /***
+     * Truncates the table in the requestURL on remote database.
+     * @param requestURL URL to web-service to delete the table.
+     */
+    public void deleteDataFromServer(String requestURL){
+        // Response received from the server
+        Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray jsonResponse) {
+
+                try {
+                    boolean success = jsonResponse.getJSONObject(0).getBoolean("success");
+
+                    if (success) {
+                        Log.i(TAG, "Response, successfull");
+
+                        //Code when response is successfull, till now > nothing.
+
+                    } else {
+                        //TODO Dialog for sync-Problem.
+                        /*
+                         * Handling of Error in Sync-Problem, but not working yet.
+                         *
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage("Sync failed")
+                                .setNegativeButton("OK", null)
+                                .create()
+                                .show();
+                        */
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Response.ErrorListener errorListener= new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(TAG, error.toString());
+            }
+        };
+
+        //Create the request, send it to the specified URL and get die answer.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, requestURL, null, responseListener, errorListener);
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(jsonArrayRequest);
     }
@@ -229,6 +294,9 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         queue.add(jsonArrayRequest);
     }
 
+    /***
+     * Interface for getting the result of the volley HTTP-Request to the onPerform-Method
+     */
     public interface RemoteServerCallback{
         void onSuccess(int result);
     }
@@ -256,7 +324,11 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         cursor.moveToFirst();
 
-        return cursor.getCount();
+        int count = cursor.getCount();
+
+        cursor.close();
+
+        return count;
     }
 
     /***
@@ -278,9 +350,11 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                 null
         );
 
-        cursor.moveToFirst();
+        int count = cursor.getCount();
 
-        return cursor.getCount();
+        cursor.close();
+
+        return count;
     }
 
     /***
@@ -444,174 +518,69 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority,
                               ContentProviderClient provider, SyncResult syncResult) {
         Log.i(TAG, "Beginning network synchronization");
-        Log.i(TAG, "Test output for syncing.");
 
-//        int countLocalExpenditures = getExpenditureCountLocalDb();
-//        int countLocalEarnings = getEarningsCountLocalDb();
-//
-//        Log.i(TAG, "Expenditure local: " + countLocalExpenditures + ", Earnings  local: " + countLocalEarnings);
-//
-//        final int countRemoteExpenditures[] = new int[1];
-//        getElementCountRemoteDb(new RemoteServerCallback() {
-//            @Override
-//            public void onSuccess(int result) {
-//                countRemoteExpenditures[0] = result;
-//            }
-//        }, REQUEST_URL_GET_COUNT_EXPENDITURE);
-//
-//        final int countRemoteEarnings[] = new int[1];
-//        getElementCountRemoteDb(new RemoteServerCallback() {
-//            @Override
-//            public void onSuccess(int result) {
-//                countRemoteEarnings[0] = result;
-//                Log.i(TAG, "Expenditure remote: " + countRemoteExpenditures[0] + ", Earnings remote: " + countRemoteEarnings[0]);
-//            }
-//        }, REQUEST_URL_GET_COUNT_SALARY);
-//
-//
-//        //send data to server if count is not equal
-//        if(countLocalEarnings != countRemoteEarnings[0]){
-//            //All earning elements from local database in JSONArray
-//            JSONArray earningArray = getEarningsTableInJsonArray();
-//
-//            sendDataToServer(earningArray, REQUEST_URL_SAVE_SALARY);
-//        }
-//
-//        if(countLocalExpenditures != countRemoteExpenditures[0]) {
-//            //All expenditure elements from local database in JSONArray
-//            JSONArray expenditureArray = getExpenditureTableInJsonArray();
-//
-//            sendDataToServer(expenditureArray, REQUEST_URL_SAVE_EXPENDITURE);
-//        }
+        //Get count for local database on device
+        int countLocalExpenditures = getExpenditureCountLocalDb();
+        int countLocalEarnings = getEarningsCountLocalDb();
 
+        Log.i(TAG, "Expenditure local: " + countLocalExpenditures + ", Earnings  local: " + countLocalEarnings);
 
+        //Get count of remote entries for expenditures
+        final int countRemoteExpenditures[] = new int[1];
+        getElementCountRemoteDb(new RemoteServerCallback() {
+            @Override
+            public void onSuccess(int result) {
+                countRemoteExpenditures[0] = result;
+            }
+        }, REQUEST_URL_GET_COUNT_EXPENDITURE);
+
+        //Get count of remote entries for salary
+        final int countRemoteEarnings[] = new int[1];
+        getElementCountRemoteDb(new RemoteServerCallback() {
+            @Override
+            public void onSuccess(int result) {
+                countRemoteEarnings[0] = result;
+                Log.i(TAG, "Expenditure remote: " + countRemoteExpenditures[0] + ", Earnings remote: " + countRemoteEarnings[0]);
+            }
+        }, REQUEST_URL_GET_COUNT_SALARY);
+
+        //Wait for answer of remoteCount to be populated back to local variables
+        try {
+            Thread.sleep(3000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+
+        //Store response in local variables, so we can use them in following checks of difference of
+        //remote and local count
+        int remoteCountExpenditures = countRemoteExpenditures[0];
+        int remoteCountEarnings = countRemoteEarnings[0];
+
+        //send data to server if count is not equal
+        if(countLocalEarnings != remoteCountEarnings){
+
+            //Delete all entries on remote server
+            deleteDataFromServer(REQUEST_URL_DELETE_SALARY);
+            Log.i(TAG, "Salary table deleted.");
+
+            //All earning elements from local database in JSONArray
+            JSONArray earningArray = getEarningsTableInJsonArray();
+
+            sendDataToServer(earningArray, REQUEST_URL_SAVE_SALARY);
+        }
+
+        if(countLocalExpenditures != remoteCountExpenditures) {
+
+            //Delete all entries on remote server
+            deleteDataFromServer(REQUEST_URL_DELETE_EXPENDITURE);
+            Log.i(TAG, "Expenditure table deleted.");
+
+            //All expenditure elements from local database in JSONArray
+            JSONArray expenditureArray = getExpenditureTableInJsonArray();
+
+            sendDataToServer(expenditureArray, REQUEST_URL_SAVE_EXPENDITURE);
+        }
 
         Log.i(TAG, "Network synchronization complete");
     }
-
-    /**
-     * Read XML from an input stream, storing it into the content provider.
-     *
-     * <p>This is where incoming data is persisted, committing the results of a sync. In order to
-     * minimize (expensive) disk operations, we compare incoming data with what's already in our
-     * database, and compute a merge. Only changes (insert/update/delete) will result in a database
-     * write.
-     *
-     * <p>As an additional optimization, we use a batch operation to perform all database writes at
-     * once.
-     *
-     * <p>Merge strategy:
-     * 1. Get cursor to all items in feed<br/>
-     * 2. For each item, check if it's in the incoming data.<br/>
-     *    a. YES: Remove from "incoming" list. Check if data has mutated, if so, perform
-     *            database UPDATE.<br/>
-     *    b. NO: Schedule DELETE from database.<br/>
-     * (At this point, incoming database only contains missing items.)<br/>
-     * 3. For any items remaining in incoming list, ADD to database.
-     */
-//    public void updateLocalFeedData(final InputStream stream, final SyncResult syncResult)
-//            throws IOException, XmlPullParserException, RemoteException,
-//            OperationApplicationException, ParseException {
-//        final FeedParser feedParser = new FeedParser();
-//        final ContentResolver contentResolver = getContext().getContentResolver();
-//
-//        Log.i(TAG, "Parsing stream as Atom feed");
-//        final List<FeedParser.Entry> entries = feedParser.parse(stream);
-//        Log.i(TAG, "Parsing complete. Found " + entries.size() + " entries");
-//
-//
-//        ArrayList<ContentProviderOperation> batch = new ArrayList<ContentProviderOperation>();
-//
-//        // Build hash table of incoming entries
-//        HashMap<String, FeedParser.Entry> entryMap = new HashMap<String, FeedParser.Entry>();
-//        for (FeedParser.Entry e : entries) {
-//            entryMap.put(e.id, e);
-//        }
-//
-//        // Get list of all items
-//        Log.i(TAG, "Fetching local entries for merge");
-//        Uri uri = FeedContract.Entry.CONTENT_URI; // Get all entries
-//        Cursor c = contentResolver.query(uri, PROJECTION, null, null, null);
-//        assert c != null;
-//        Log.i(TAG, "Found " + c.getCount() + " local entries. Computing merge solution...");
-//
-//        // Find stale data
-//        int id;
-//        String entryId;
-//        String title;
-//        String link;
-//        long published;
-//        while (c.moveToNext()) {
-//            syncResult.stats.numEntries++;
-//            id = c.getInt(COLUMN_ID);
-//            entryId = c.getString(COLUMN_ENTRY_ID);
-//            title = c.getString(COLUMN_TITLE);
-//            link = c.getString(COLUMN_LINK);
-//            published = c.getLong(COLUMN_PUBLISHED);
-//            FeedParser.Entry match = entryMap.get(entryId);
-//            if (match != null) {
-//                // Entry exists. Remove from entry map to prevent insert later.
-//                entryMap.remove(entryId);
-//                // Check to see if the entry needs to be updated
-//                Uri existingUri = FeedContract.Entry.CONTENT_URI.buildUpon()
-//                        .appendPath(Integer.toString(id)).build();
-//                if ((match.title != null && !match.title.equals(title)) ||
-//                        (match.link != null && !match.link.equals(link)) ||
-//                        (match.published != published)) {
-//                    // Update existing record
-//                    Log.i(TAG, "Scheduling update: " + existingUri);
-//                    batch.add(ContentProviderOperation.newUpdate(existingUri)
-//                            .withValue(FeedContract.Entry.COLUMN_NAME_TITLE, match.title)
-//                            .withValue(FeedContract.Entry.COLUMN_NAME_LINK, match.link)
-//                            .withValue(FeedContract.Entry.COLUMN_NAME_PUBLISHED, match.published)
-//                            .build());
-//                    syncResult.stats.numUpdates++;
-//                } else {
-//                    Log.i(TAG, "No action: " + existingUri);
-//                }
-//            } else {
-//                // Entry doesn't exist. Remove it from the database.
-//                Uri deleteUri = FeedContract.Entry.CONTENT_URI.buildUpon()
-//                        .appendPath(Integer.toString(id)).build();
-//                Log.i(TAG, "Scheduling delete: " + deleteUri);
-//                batch.add(ContentProviderOperation.newDelete(deleteUri).build());
-//                syncResult.stats.numDeletes++;
-//            }
-//        }
-//        c.close();
-//
-//        // Add new items
-//        for (FeedParser.Entry e : entryMap.values()) {
-//            Log.i(TAG, "Scheduling insert: entry_id=" + e.id);
-//            batch.add(ContentProviderOperation.newInsert(FeedContract.Entry.CONTENT_URI)
-//                    .withValue(FeedContract.Entry.COLUMN_NAME_ENTRY_ID, e.id)
-//                    .withValue(FeedContract.Entry.COLUMN_NAME_TITLE, e.title)
-//                    .withValue(FeedContract.Entry.COLUMN_NAME_LINK, e.link)
-//                    .withValue(FeedContract.Entry.COLUMN_NAME_PUBLISHED, e.published)
-//                    .build());
-//            syncResult.stats.numInserts++;
-//        }
-//        Log.i(TAG, "Merge solution ready. Applying batch update");
-//        mContentResolver.applyBatch(FeedContract.CONTENT_AUTHORITY, batch);
-//        mContentResolver.notifyChange(
-//                FeedContract.Entry.CONTENT_URI, // URI where data was modified
-//                null,                           // No local observer
-//                false);                         // IMPORTANT: Do not sync to network
-//        // This sample doesn't support uploads, but if *your* code does, make sure you set
-//        // syncToNetwork=false in the line above to prevent duplicate syncs.
-//    }
-//
-//    /**
-//     * Given a string representation of a URL, sets up a connection and gets an input stream.
-//     */
-//    private InputStream downloadUrl(final URL url) throws IOException {
-//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//        conn.setReadTimeout(NET_READ_TIMEOUT_MILLIS /* milliseconds */);
-//        conn.setConnectTimeout(NET_CONNECT_TIMEOUT_MILLIS /* milliseconds */);
-//        conn.setRequestMethod("GET");
-//        conn.setDoInput(true);
-//        // Starts the query
-//        conn.connect();
-//        return conn.getInputStream();
-//    }
 }
