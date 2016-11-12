@@ -5,6 +5,18 @@
     <string name="label_activity_balance_overview">Balance Overview</string>
     <string name="label_activity_list_earnings">My Earnings</string>
     <string name="label_activity_list_expenditures">My Expenditures</string>
+    <string name="toast_register_successful">Registration of user successful. Please Login with your credentials.</string>
+    <string name="welcometext_activity_main">Know where your money goes</string>
+    <string name="btn_new_to_budgetr">New to Budgetr</string>
+    <string name="btn_already_using_budgetr">Already using Budgetr</string>
+    <string name="text_rights_reserved">© All Rights Reserved. Budgetr 2016.</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_login">Login</string>
+    <string name="et_hint_username">Username</string>
+    <string name="text_login_account">Login to your account</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="et_hint_name">Name</string>
+    <string name="text_register_account">Register you</string>
 
     <string name="SpentThisMonth">Spent this month</string>
     <string name="EarnedThisMonth">Earned this month</string>
@@ -18,10 +30,9 @@
     <string name="empty_expenditures_subtitle_text">Good, but when you spent your money, add it here.</string>
     <string name="tv_currency">CHF</string>
 
-    <string name="unknown_expenditure_description">What you spent this for?</string>
+    <string name="unknown_expenditure_description">Unknown expenditure</string>
 
-    <string name="unknown_earning_description">Where you earned this money?</string>
-    <string name="title_activity_editor_expenditures">EditorExpendituresActivity</string>
+    <string name="unknown_earning_description">Unknown earning</string>
 
     <string name="action_delete">Delete entry</string>
     <string name="action_save">Save</string>
@@ -35,14 +46,14 @@
     <string name="tv_editor_expenditures_date">Date</string>
     <string name="tv_editor_expenditures_place">Place</string>
     <string name="hint_editor_expenditures_place">Where you spent your money?</string>
-    <string name="hint_editor_expenditures_date">DD/MM/YY</string>
+    <string name="hint_editor_expenditures_date">YYYY-MM-DD</string>
 
     <!-- activity_editor_earnings.xml -->
     <string name="editor_earnings_description">Description</string>
     <string name="hint_editor_earnings_description">What you get money for?</string>
     <string name="tv_editor_earnings_salarymount">Amount</string>
     <string name="tv_editor_earnings_date">Date</string>
-    <string name="hint_editor_earnings_date">DD/MM/YY</string>
+    <string name="hint_editor_earnings_date">YYYY-MM-DD</string>
 
     <string name="editor_expenditures_activity_title_new_expenditure">Add new expenditure</string>
     <string name="editor_expenditures_activity_title_edit_expenditure">Edit expenditure</string>

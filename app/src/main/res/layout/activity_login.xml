@@ -6,26 +6,27 @@
     android:layout_height="match_parent"
     android:background="#2FDD86"
     android:orientation="vertical"
+    android:paddingTop="16dp"
     android:paddingBottom="5dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     tools:context="ch.msengineering.budgetr.LoginActivity">
 
     <ImageView
+        android:contentDescription="@string/app_name"
         android:layout_width="72dp"
         android:layout_height="78dp"
         android:layout_gravity="center"
         android:src="@drawable/logobudgetr" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="15dp"
-        android:text="Login to your account"
+        android:text="@string/text_login_account"
         android:textColor="#ffffff"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,21 +35,19 @@
         android:id="@+id/LinearLayout2_horizontal" >
 
         <ImageView
+            android:contentDescription="@string/et_hint_username"
             android:layout_width="33dp"
             android:layout_height="31dp"
-            android:src="@drawable/icon_email"
-
-            />
+            android:src="@drawable/icon_email" />
 
         <EditText
             android:id="@+id/etUsername"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Username"
+            android:hint="@string/et_hint_username"
             android:inputType="textEmailAddress"
             android:textColor="#ffffff"
-
-            android:layout_width="fill_parent" />
+            android:layout_width="0dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -57,6 +56,8 @@
         android:id="@+id/LinearLayout3_horizontal">
 
         <ImageView
+            android:contentDescription="@string/password"
+            android:id="@+id/iv_login_logo"
             android:layout_width="32dp"
             android:layout_height="39dp"
             android:src="@drawable/icon_lock" />
@@ -65,7 +66,7 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="#ffffff" />
     </LinearLayout>
@@ -74,19 +75,17 @@
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_gravity="center"
         android:background="@drawable/signinbutton"
-        android:onClick="onClickSignup"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="5dp"
-        android:text="Login"
-        android:textSize="18dp" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_login"
+        android:textSize="18sp" />
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/RelativLayout1">
 
@@ -95,23 +94,22 @@
             android:id="@+id/bBackToMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:textAlignment="center"
             android:background="@drawable/signinbutton"
-            android:onClick="onClickSignup"
-            android:text=" Back"
+            android:text="@string/btn_back"
             android:textColor="#ffffff"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/txAllRightReserved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="© All Rights Reserved. Budgetr 2016."
+            android:text="@string/text_rights_reserved"
             android:textColor="#ffffff"
             android:layout_marginBottom="45dp"
+            android:paddingBottom="8dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2FDD86"
     android:orientation="vertical"
+    android:paddingTop="16dp"
     android:paddingBottom="5dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -13,6 +14,7 @@
     android:weightSum="1">
 
     <ImageView
+        android:contentDescription="@string/app_name"
         android:layout_width="72dp"
         android:layout_height="78dp"
         android:layout_gravity="center"
@@ -24,9 +26,9 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="15dp"
-        android:text="Register you"
+        android:text="@string/text_register_account"
         android:textColor="#ffffff"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,28 +38,29 @@
         android:weightSum="1">
 
         <ImageView
-            android:layout_width="33dp"
+            android:contentDescription="@string/app_name"
+            android:layout_width="0dp"
             android:layout_height="31dp"
+            android:layout_weight="0.1"
             android:src="@drawable/icon_email"
             />
 
         <EditText
-            android:layout_width="131dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:ems="10"
             android:id="@+id/etEmail"
-            android:hint="Email"
-            android:layout_weight="0.94" />
+            android:hint="@string/email"
+            android:layout_weight="0.4" />
 
         <EditText
             android:id="@+id/etUsername"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/et_hint_username"
             android:inputType="textEmailAddress"
             android:textColor="#ffffff"
-            android:layout_width="163dp"
-            android:layout_weight="0.68" />
+            android:layout_width="0dp"
+            android:layout_weight="0.5" />
     </LinearLayout>
 
     <LinearLayout
@@ -66,26 +69,29 @@
         android:id="@+id/LinearLayout3_horizontal">
 
         <ImageView
-            android:layout_width="32dp"
+            android:contentDescription="@string/app_name"
+            android:layout_width="0dp"
             android:layout_height="39dp"
+            android:layout_weight="0.1"
             android:src="@drawable/icon_lock" />
 
         <EditText
             android:id="@+id/etPassword"
-            android:layout_width="166dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:layout_weight="0.4"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="#ffffff"  />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etName"
-            android:hint="Name"
-            android:layout_weight="1" />
+            android:hint="@string/et_hint_name"
+            android:layout_weight="0.5" />
 
     </LinearLayout>
 
@@ -97,11 +103,10 @@
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:background="@drawable/signinbutton"
-        android:onClick="onClickSignup"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="5dp"
-        android:text="Sign up"
-        android:textSize="18dp" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_signup"
+        android:textSize="18sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -116,21 +121,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/signinbutton"
-            android:onClick="onClickSignup"
-            android:text=" Back"
+            android:text="@string/btn_back"
             android:textColor="#ffffff"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp" />
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/txAllRightReserved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="© All Rights Reserved. Budgetr 2016."
+            android:text="@string/text_rights_reserved"
             android:textColor="#ffffff"
-            android:layout_marginBottom="45dp"
             android:layout_alignParentBottom="true"
+            android:paddingBottom="8dp"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>

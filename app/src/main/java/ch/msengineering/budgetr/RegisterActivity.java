@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -59,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
+                                Toast.makeText(RegisterActivity.this, getString(R.string.toast_register_successful), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                 RegisterActivity.this.startActivity(intent);
                             } else {

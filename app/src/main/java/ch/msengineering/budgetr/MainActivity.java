@@ -5,10 +5,12 @@ import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -30,8 +32,14 @@ public class MainActivity extends AppCompatActivity {
     // An account type, in the form of a domain name
     public static final String ACCOUNT_TYPE = "budgetr.msengineering.ch";
 
-    // Instance fields
+    // Dummy account on device for syncadapter
     Account mAccount;
+
+    // Content Resolver
+    ContentResolver mResolver;
+
+    // Content Observer for reacting on changes
+    LocalTableObserver mObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +69,36 @@ public class MainActivity extends AppCompatActivity {
         // Create the dummy account
         mAccount = CreateSyncAccount(this);
 
+        // Create Content Resolver
+        mResolver = getContentResolver();
+
+        //TODO Create it in the onResume()-Method, but it isn't existing...
+        /*
+         * Create a content observer object.
+         * Its code does not mutate the provider, so set
+         * selfChange to "false"
+         */
+        mObserver = new LocalTableObserver(new Handler());
+
+        /*
+         * Register the observer for the data table. The table's path
+         * and any of its subpaths trigger the observer.
+         */
+        mResolver.registerContentObserver(BudgetrContract.SalaryEntry.CONTENT_URI, true, mObserver);
+
+        /*
+         * Register the observer for the data table. The table's path
+         * and any of its subpaths trigger the observer.
+         */
+        mResolver.registerContentObserver(BudgetrContract.ExpenditureEntry.CONTENT_URI, true, mObserver);
     }
+
+    //TODO Implement method to unregister, when not active.
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mResolver.unregisterContentObserver(mObserver);
+//    }
 
     /**
      * Create a new dummy account for the sync adapter
@@ -95,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
          if (newAccount || !setupComplete) {
              TriggerRefresh();
              PreferenceManager.getDefaultSharedPreferences(context).edit()
-                     .putBoolean(PREF_SETUP_COMPLETE, true).commit();
+                     .putBoolean(PREF_SETUP_COMPLETE, true).apply();
          }
          return mAccount;
      }
@@ -120,6 +157,48 @@ public class MainActivity extends AppCompatActivity {
                 AuthenticatorService.GetAccount(ACCOUNT_TYPE), // Sync account
                 BudgetrContract.CONTENT_AUTHORITY,                 // Content authority
                 b);                                             // Extras
+    }
+
+    /***
+     * Class for observing changing data in database and upload it whenn changed to server.
+     */
+    public class LocalTableObserver extends ContentObserver {
+        /**
+         * Creates a content observer.
+         *
+         * @param handler The handler to run {@link #onChange} on, or null if none.
+         */
+        public LocalTableObserver(Handler handler) {
+            super(handler);
+        }
+
+        /*
+         * Define a method that's called when data in the
+         * observed content provider changes.
+         * This method signature is provided for compatibility with
+         * older platforms.
+         */
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+        }
+
+        /*
+         * Define a method that's called when data in the
+         * observed content provider changes.
+         */
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+
+            Bundle b = new Bundle();
+            // Disable sync backoff and ignore sync preferences. In other words...perform sync NOW!
+            b.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+            b.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+
+            ContentResolver.requestSync(mAccount, CONTENT_AUTHORITY, b);
+
+        }
     }
 
 }

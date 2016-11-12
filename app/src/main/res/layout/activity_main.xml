@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2FDD86"
@@ -7,6 +6,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:contentDescription="@string/app_name"
         android:id="@+id/pSignin"
         android:layout_width="220dp"
         android:layout_height="122dp"
@@ -21,26 +21,25 @@
         android:gravity="center"
         android:layout_weight="1"
         android:paddingBottom="10dp"
-        android:text="Know where your money goes"
+        android:text="@string/welcometext_activity_main"
         android:textColor="#ffffff"
-        android:textSize="22dp" />
-
+        android:textSize="22sp" />
     <Button
         android:id="@+id/bSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:accessibilityLiveRegion="none"
         android:background="@drawable/signupbutton"
-        android:text="New to Budgetr" />
+        android:textColor="@android:color/black"
+        android:text="@string/btn_new_to_budgetr" />
 
     <Button
         android:id="@+id/bSignin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:accessibilityLiveRegion="none"
         android:background="@drawable/signinbutton"
-        android:text="Already using Budgetr" />
+        android:textColor="@android:color/black"
+        android:text="@string/btn_already_using_budgetr" />
 
 </LinearLayout>
