@@ -101,7 +101,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         mDateEditText = (EditText) findViewById(R.id.et_editor_expenditures_date);
         mPlaceEditText = (EditText) findViewById(R.id.et_editor_expenditures_place);
         mDescriptionEditText = (EditText) findViewById(R.id.et_editor_expenditures_description);
-        mCameraButton = (Button) findViewById(R.id.bCapture);
+        mCameraButton = (Button) findViewById(R.id.bCaptureReceipt);
 
         // If the intent DOES NOT contain a expenditure content URI, then we know that we are
         // creating a new expenditure.
@@ -110,7 +110,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             setTitle(getString(R.string.editor_expenditures_activity_title_new_expenditure));
 
             //Set actual date as default
-            mDateEditText.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            mDateEditText.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date()));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a expenditure that hasn't been created yet.)

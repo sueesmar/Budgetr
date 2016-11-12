@@ -70,7 +70,7 @@ import ch.msengineering.budgetr.LoginRequest;
  * SyncService.
  */
 class SyncAdapter extends AbstractThreadedSyncAdapter {
-    public static final String TAG = "SyncAdapter";
+    private static final String TAG = "SyncAdapter";
 
     /**
      * URL for base directory of remote DB-Server
@@ -110,31 +110,14 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String REQUEST_URL_DELETE_EXPENDITURE =  BASE_URL_REMOTE_SERVER + "DeleteExpenditure.php";
 
     /**
-     * Network connection timeout, in milliseconds.
+     * Network connection delay, in milliseconds.
      */
-    private static final int NET_CONNECT_TIMEOUT_MILLIS = 15000;  // 15 seconds
-
-    /**
-     * Network read timeout, in milliseconds.
-     */
-    private static final int NET_READ_TIMEOUT_MILLIS = 10000;  // 10 seconds
+    private static final int NET_CONNECT_DELAY_MILLIS = 2000;  // 2 seconds
 
     /**
      * Content resolver, for performing database operations.
      */
     private final ContentResolver mContentResolver;
-
-    /**
-     * Project used when querying content provider. Returns all known fields.
-     */
-    private static final String[] PROJECTION = new String[] {
-            BudgetrContract.ExpenditureEntry._ID,
-            BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT,
-            BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE,
-            BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION,
-            BudgetrContract.ExpenditureEntry.COLUMN_NAME_PAYMENTMETHODE,
-            BudgetrContract.ExpenditureEntry.COLUMN_NAME_RECEIPT,
-            BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE};
 
     /**
      * Constructor. Obtains handle to content resolver for later use.
@@ -158,7 +141,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
      * @param localDataArray {@link JSONArray} with all the local table elements.
      * @param requestURL URL to send request to, depending if sending expenditure or earnings.
      */
-    public void sendDataToServer(final JSONArray localDataArray, String requestURL) {
+    private void sendDataToServer(final JSONArray localDataArray, String requestURL) {
 
         // Response received from the server
         Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
@@ -211,7 +194,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
      * Truncates the table in the requestURL on remote database.
      * @param requestURL URL to web-service to delete the table.
      */
-    public void deleteDataFromServer(String requestURL){
+    private void deleteDataFromServer(String requestURL){
         // Response received from the server
         Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
             @Override
@@ -259,9 +242,8 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     /***
      * Gets the number of elements of the requested table from the remote database.
      * @param requestURL URL to the web-interface for the requested table.
-     * @return Number of elements in table.
      */
-    public void getElementCountRemoteDb(final RemoteServerCallback callback, String requestURL){
+    private void getElementCountRemoteDb(final RemoteServerCallback callback, String requestURL){
 
         final int[] countRemoteDb = new int[1];
 
@@ -298,7 +280,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     /***
      * Interface for getting the result of the volley HTTP-Request to the onPerform-Method
      */
-    public interface RemoteServerCallback{
+    private interface RemoteServerCallback{
         void onSuccess(int result);
     }
 
@@ -306,7 +288,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
      * Gets the number of entries in the expenditure table of the local sqlite database.
      * @return Number of entries.
      */
-    public int getExpenditureCountLocalDb(){
+    private int getExpenditureCountLocalDb(){
 
         String[] projection = {
                 BudgetrContract.ExpenditureEntry._ID,
@@ -323,9 +305,14 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                 null
         );
 
-        cursor.moveToFirst();
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
 
-        int count = cursor.getCount();
+        int count = 0;
+        if (cursor != null) {
+            count = cursor.getCount();
+        }
 
         cursor.close();
 
@@ -336,7 +323,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
      * Gets the number of entries in the earnings table of the local sqlite database.
      * @return Number of entries
      */
-    public int getEarningsCountLocalDb(){
+    private int getEarningsCountLocalDb(){
 
         String[] projection = {
                 BudgetrContract.SalaryEntry._ID,
@@ -351,9 +338,14 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                 null
         );
 
-        int count = cursor.getCount();
+        int count = 0;
+        if (cursor != null) {
+            count = cursor.getCount();
+        }
 
-        cursor.close();
+        if (cursor != null) {
+            cursor.close();
+        }
 
         return count;
     }
@@ -362,7 +354,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
      * Read all data from expenditureTable and create {@link JSONArray}.
      * @return All data in one {@link JSONArray}
      */
-    public JSONArray getExpenditureTableInJsonArray(){
+    private JSONArray getExpenditureTableInJsonArray(){
 
         String[] projection = {
                 BudgetrContract.ExpenditureEntry._ID,
@@ -379,7 +371,9 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                 null
         );
 
-        cursor.moveToFirst();
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
 
         // Find the columns of expenditure attributes that we're interested in
         int idColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry._ID);
@@ -397,7 +391,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         JSONArray expenditureArray = new JSONArray();
 
-        if (cursor != null && cursor.getCount() > 0) {
+        if (cursor != null && (cursor.getCount() > 0)) {
 
             while (!cursor.isAfterLast()) {
 
@@ -437,7 +431,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
      * Read all data from salaryTable and create {@link JSONArray}.
      * @return All data in one {@link JSONArray}
      */
-    public JSONArray getEarningsTableInJsonArray(){
+    private JSONArray getEarningsTableInJsonArray(){
 
         String[] projection = {
                 BudgetrContract.SalaryEntry._ID,
@@ -452,7 +446,9 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                 null
         );
 
-        cursor.moveToFirst();
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
 
         // Find the columns of expenditure attributes that we're interested in
         int idColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry._ID);
@@ -546,11 +542,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         }, REQUEST_URL_GET_COUNT_SALARY);
 
         //Wait for answer of remoteCount to be populated back to local variables
-        try {
-            Thread.sleep(3000);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+        networkDelay();
 
         //Store response in local variables, so we can use them in following checks of difference of
         //remote and local count
@@ -564,6 +556,8 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
             deleteDataFromServer(REQUEST_URL_DELETE_SALARY);
             Log.i(TAG, "Salary table deleted.");
 
+            networkDelay();
+
             //All earning elements from local database in JSONArray
             JSONArray earningArray = getEarningsTableInJsonArray();
 
@@ -576,6 +570,8 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
             deleteDataFromServer(REQUEST_URL_DELETE_EXPENDITURE);
             Log.i(TAG, "Expenditure table deleted.");
 
+            networkDelay();
+
             //All expenditure elements from local database in JSONArray
             JSONArray expenditureArray = getExpenditureTableInJsonArray();
 
@@ -583,5 +579,16 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
 
         Log.i(TAG, "Network synchronization complete");
+    }
+
+    /***
+     * Helper Method for delay in network transmission
+     */
+    private void networkDelay(){
+        try {
+            Thread.sleep(NET_CONNECT_DELAY_MILLIS);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
