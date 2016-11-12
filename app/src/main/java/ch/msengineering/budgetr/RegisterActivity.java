@@ -15,6 +15,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Created by Cengiz on 06.11.16.
+ * This is the register class which allows to define the credentials
+ */
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -37,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
                     RegisterActivity.this.startActivity(intent);
                 }
             });
-
+        // if the register button is clicked, the field values will be send as json object
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

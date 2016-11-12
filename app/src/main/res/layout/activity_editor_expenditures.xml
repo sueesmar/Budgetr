@@ -145,17 +145,20 @@
             android:hint="@string/hint_editor_expenditures_description"
             android:textColor="@color/colorTextEditorExpenditure"
             android:paddingBottom="8dp" />
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/bCamera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txAllRightReserved"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/signinbutton"
-        android:text="Capture receipt"
-        android:textColor="#ffffff" />
+        <Button
+            android:id="@+id/bCaptureReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txAllRightReserved"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/signinbutton"
+            android:onClick="onClickTakePicture"
+            android:text="Capture receipt"
+
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
 
 </LinearLayout>

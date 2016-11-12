@@ -8,10 +8,10 @@ import java.util.Map;
 
 /**
  * Created by Cengiz on 31.10.16.
- * the first registration class which allows to define name, email and others...
+ * the register request class which sends the json to the server as a post request
  */
 
-// allows us to make a request to the db-server register.php file
+// allows to make a request to the db-server register.php file which is on the server
 public class RegisterRequest extends StringRequest {
 
     private static final String REGISTER_REQUEST_URL = "http://whitehat.ch/Register.php";

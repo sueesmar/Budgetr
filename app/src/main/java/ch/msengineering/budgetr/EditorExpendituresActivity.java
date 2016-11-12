@@ -101,7 +101,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         mDateEditText = (EditText) findViewById(R.id.et_editor_expenditures_date);
         mPlaceEditText = (EditText) findViewById(R.id.et_editor_expenditures_place);
         mDescriptionEditText = (EditText) findViewById(R.id.et_editor_expenditures_description);
-        mCameraButton = (Button) findViewById(R.id.bCamera);
+        mCameraButton = (Button) findViewById(R.id.bCapture);
 
         // If the intent DOES NOT contain a expenditure content URI, then we know that we are
         // creating a new expenditure.
