@@ -75,6 +75,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
     /**
      * URL for base directory of remote DB-Server
      */
+//    Local URL for Testing
 //    private static final String BASE_URL_REMOTE_SERVER = "http://192.168.10.109/budgetr/";
     private static final String BASE_URL_REMOTE_SERVER = "http://whitehat.ch/";
 
