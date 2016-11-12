@@ -147,7 +147,7 @@
             android:paddingBottom="8dp" />
 
         <Button
-            android:id="@+id/bCamera"
+            android:id="@+id/bCaptureReceipt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/txAllRightReserved"
