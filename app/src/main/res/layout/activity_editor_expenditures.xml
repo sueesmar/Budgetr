@@ -156,7 +156,6 @@
             android:background="@drawable/signinbutton"
             android:onClick="onClickTakePicture"
             android:text="Capture receipt"
-
             android:textColor="#ffffff" />
 
     </LinearLayout>

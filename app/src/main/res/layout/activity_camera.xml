@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1_vertical"
+    android:id="@+id/activity_camera"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2FDD86"
@@ -9,13 +9,14 @@
     android:paddingBottom="5dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context="ch.msengineering.budgetr.LoginActivity">
+    tools:context="ch.msengineering.budgetr.CameraActivity">
 
     <ImageView
         android:layout_width="72dp"
         android:layout_height="78dp"
         android:layout_gravity="center"
         android:src="@drawable/logobudgetr" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +33,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/LinearLayout2_horizontal" >
-
     </LinearLayout>
 
 

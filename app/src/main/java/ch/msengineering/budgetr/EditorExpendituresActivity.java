@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -124,15 +124,6 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             getLoaderManager().initLoader(EXISTING_EXPENDITURE_LOADER, null, this);
         }
 
-
-        // Setup OnTouchListeners on all the input fields, so we can determine if the user
-        // has touched or modified them. This will let us know if there are unsaved changes
-        // or not, if the user tries to leave the editor without saving.
-        mAmountEditText.setOnTouchListener(mTouchListener);
-        mDateEditText.setOnTouchListener(mTouchListener);
-        mPlaceEditText.setOnTouchListener(mTouchListener);
-        mDescriptionEditText.setOnTouchListener(mTouchListener);
-
         mCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +132,14 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
 
             }
         });
+
+        // Setup OnTouchListeners on all the input fields, so we can determine if the user
+        // has touched or modified them. This will let us know if there are unsaved changes
+        // or not, if the user tries to leave the editor without saving.
+        mAmountEditText.setOnTouchListener(mTouchListener);
+        mDateEditText.setOnTouchListener(mTouchListener);
+        mPlaceEditText.setOnTouchListener(mTouchListener);
+        mDescriptionEditText.setOnTouchListener(mTouchListener);
 
     }
 

@@ -10,9 +10,11 @@ import android.widget.ImageView;
 
 /**
  * Created by Cengiz on 11.11.16.
+ * The CameraActivity will launch the camera and then capture the picture and display it
  */
 
 public class CameraActivity extends Activity {
+
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
 
@@ -21,8 +23,8 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         this.imageView = (ImageView)this.findViewById(R.id.imgPicture);
-        Button photoButton = (Button) this.findViewById(R.id.bCapture);
-        photoButton.setOnClickListener(new View.OnClickListener() {
+        Button captureButton = (Button) this.findViewById(R.id.bCapture);
+        captureButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
