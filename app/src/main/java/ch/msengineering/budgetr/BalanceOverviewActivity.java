@@ -63,7 +63,7 @@ public class BalanceOverviewActivity extends AppCompatActivity {
      */
     public void displayTotalEarnings(){
 
-        float amount = getTotalEarnings();
+        double amount = getTotalEarnings();
 
         //Format with two decimals
         mTotalEarningTextView.setText(String.format("%1$.2f",amount));
@@ -74,7 +74,7 @@ public class BalanceOverviewActivity extends AppCompatActivity {
      */
     public void displayTotalExpenditures(){
 
-        float amount = getTotalExpenditures();
+        double amount = getTotalExpenditures();
 
         mTotalExpenditureTextView.setText(String.format("%1$.2f", amount));
     }
@@ -83,7 +83,7 @@ public class BalanceOverviewActivity extends AppCompatActivity {
      * Gets the total amount of expenditures from database
      * @return Total expenditures
      */
-    public float getTotalExpenditures(){
+    public double getTotalExpenditures(){
 
         //SQL SUM() over the amount column
         String[] projection = {
@@ -99,14 +99,14 @@ public class BalanceOverviewActivity extends AppCompatActivity {
 
         cursor.moveToFirst();
 
-        return cursor.getFloat(0);
+        return cursor.getDouble(0);
     }
 
     /***
      * Gets the total amount of earnings from database
      * @return Total earnings
      */
-    public float getTotalEarnings(){
+    public double getTotalEarnings(){
 
         //SQL SUM() over the amount column
         String[] projection = {
@@ -122,17 +122,17 @@ public class BalanceOverviewActivity extends AppCompatActivity {
 
         cursor.moveToFirst();
 
-        return cursor.getFloat(0);
+        return cursor.getDouble(0);
     }
 
     /***
      * Calculates actual balance and display the amount on the balance overview.
      */
     public void displayActualBalance(){
-        float totalEarnings = getTotalEarnings();
-        float totalExpenditures = getTotalExpenditures();
+        double totalEarnings = getTotalEarnings();
+        double totalExpenditures = getTotalExpenditures();
 
-        float actualBalance = totalEarnings - totalExpenditures;
+        double actualBalance = totalEarnings - totalExpenditures;
 
         if(0 > actualBalance){
             mActualBalanceTextView.setTextColor(getResources().getColor(R.color.colorTextBalanceOverviewNegativ));
