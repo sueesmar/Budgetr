@@ -18,9 +18,10 @@
     <string name="et_hint_name">Name</string>
     <string name="text_register_account">Register you</string>
 
-    <string name="SpentThisMonth">Spent this month</string>
-    <string name="EarnedThisMonth">Earned this month</string>
-    <string name="ActualBalance">Money left this month</string>
+    <string name="SpentThisMonth">Expenditures</string>
+    <string name="EarnedThisMonth">Earnings</string>
+    <string name="ActualBalance">Balance</string>
+    <string name="tv_balance_overview_description">The overview shows you the expenditures and earnings of the actual month and calculates the actual balance. The reset can made in each list view.</string>
     <string name="btn_show_earnings">My Earnings</string>
     <string name="btn_show_expenditures">My Expenditures</string>
 

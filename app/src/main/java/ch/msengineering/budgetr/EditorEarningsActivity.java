@@ -50,6 +50,11 @@ public class EditorEarningsActivity extends AppCompatActivity implements
     private EditText mDateEditText;
 
     /**
+     * EditText field to enter the earning's description
+     */
+    private EditText mDescriptionEditText;
+
+    /**
      * Boolean flag that keeps track of whether the earning has been edited (true) or not (false)
      */
     private boolean mEarningHasChanged = false;
@@ -79,6 +84,7 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         // Find all relevant views that we will need to read user input from
         mSalarymountEditText = (EditText) findViewById(R.id.et_editor_earnings_salarymount);
         mDateEditText = (EditText) findViewById(R.id.et_editor_earnings_date);
+        mDescriptionEditText = (EditText) findViewById(R.id.et_editor_earnings_description);
 
         // If the intent DOES NOT contain a earning content URI, then we know that we are
         // creating a new earning.
@@ -107,6 +113,7 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         // or not, if the user tries to leave the editor without saving.
         mSalarymountEditText.setOnTouchListener(mTouchListener);
         mDateEditText.setOnTouchListener(mTouchListener);
+        mDescriptionEditText.setOnTouchListener(mTouchListener);
     }
 
     /**
@@ -117,6 +124,7 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         // Use trim to eliminate leading or trailing white space
         String salarymountString = mSalarymountEditText.getText().toString().trim();
         String dateString = mDateEditText.getText().toString().trim();
+        String descriptionString = mDescriptionEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new earning
         // and check if all the fields in the editor are blank
@@ -131,6 +139,7 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         // and earning attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE, dateString);
+        values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION, descriptionString);
         // If the amount is not provided by the user, don't try to parse the string into an
         // double value. Use 0 by default.
         double amount = 0;
@@ -275,7 +284,8 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         String[] projection = {
                 BudgetrContract.SalaryEntry._ID,
                 BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT,
-                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE};
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -299,15 +309,18 @@ public class EditorEarningsActivity extends AppCompatActivity implements
             // Find the columns of earning attributes that we're interested in
             int amountColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT);
             int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE);
+            int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION);
 
             // Extract out the value from the Cursor for the given column index
             double amount = cursor.getDouble(amountColumnIndex);
             String date = cursor.getString(dateColumnIndex);
+            String description = cursor.getString(descriptionColumnIndex);
 
 
             // Update the views on the screen with the values from the database
             mSalarymountEditText.setText(String.format(Locale.US,"%1$.2f",amount));
             mDateEditText.setText(date);
+            mDescriptionEditText.setText(description);
         }
     }
 
@@ -316,6 +329,7 @@ public class EditorEarningsActivity extends AppCompatActivity implements
         // If the loader is invalidated, clear out all the data from the input fields.
         mSalarymountEditText.setText("");
         mDateEditText.setText("");
+        mDescriptionEditText.setText("");
     }
 
     /**

@@ -94,6 +94,7 @@ public class ListEarningsActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT, 100.00);
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION, "Loan");
         values.put(BudgetrContract.SalaryEntry.COLUMN_NAME_USER_ID, 1);
 
         // Insert a new row into the provider using the ContentResolver.
@@ -141,6 +142,7 @@ public class ListEarningsActivity extends AppCompatActivity implements
         String[] projection = {
                 BudgetrContract.SalaryEntry._ID,
                 BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION,
                 BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE };
 
         // This loader will execute the ContentProvider's query method on a background thread

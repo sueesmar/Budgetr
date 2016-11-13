@@ -18,7 +18,7 @@ public class BudgetrDbHelper extends SQLiteOpenHelper {
     /**
      * Database version. If you change the database schema, you must increment the database version.
      */
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     /**
      * Constructs a new instance of {@link BudgetrDbHelper}.
@@ -59,6 +59,7 @@ public class BudgetrDbHelper extends SQLiteOpenHelper {
                 + BudgetrContract.SalaryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT + " REAL NOT NULL, "
                 + BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE + " TEXT, "
+                + BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION + " TEXT, "
                 + BudgetrContract.SalaryEntry.COLUMN_NAME_USER_ID + " INTEGER, "
                 + " FOREIGN KEY (" + BudgetrContract.SalaryEntry.COLUMN_NAME_USER_ID + ") REFERENCES " + BudgetrContract.UserEntry.TABLE_NAME + "(" + BudgetrContract.UserEntry._ID + "));";
 

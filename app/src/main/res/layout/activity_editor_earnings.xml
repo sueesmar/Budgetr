@@ -30,7 +30,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_weight="1.5">
 
             <EditText
                 android:id="@+id/et_editor_earnings_salarymount"
@@ -72,7 +72,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1.5">
 
             <!-- TODO Change to DatePicker when time left-->
             <EditText
@@ -88,7 +88,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <!--
+
     <LinearLayout
         android:id="@+id/container_editor_earnings_description"
         android:layout_width="match_parent"
@@ -101,7 +101,8 @@
             android:layout_height="wrap_content"
             android:text="@string/editor_earnings_description"
             android:textColor="@color/colorTextEditorEarning"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:paddingTop="16dp"/>
 
         <EditText
             android:id="@+id/et_editor_earnings_description"
@@ -115,6 +116,6 @@
             android:paddingBottom="8dp" />
 
     </LinearLayout>
-    -->
+
 
 </LinearLayout>

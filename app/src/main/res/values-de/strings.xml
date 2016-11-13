@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Budgetr</string>
-    <string name="ActualBalance">Diesen Monat übrig</string>
-    <string name="EarnedThisMonth">Diesen Monat verdient</string>
-    <string name="SpentThisMonth">Diesen Monat ausgegeben</string>
+    <string name="ActualBalance">Kontostand</string>
+    <string name="EarnedThisMonth">Einnahmen</string>
+    <string name="SpentThisMonth">Ausgaben</string>
     <string name="action_delete">Lösche Eintrag</string>
     <string name="action_delete_all_entries">Lösche alles</string>
     <string name="action_insert_dummy_data">Füge Beispiel-Daten ein</string>
@@ -68,4 +68,5 @@
     <string name="et_hint_name">Name</string>
     <string name="et_hint_username">Benutzername</string>
     <string name="text_register_account">Erstelle ein Konto</string>
+    <string name="tv_balance_overview_description">Die Übersicht zeigt Ihnen die Ausgaben und Einnahmen des aktuellen Monats und berechnet den aktuellen Kontostand. Die Rücksetzung erfolgt in den einzelnen Listenansichten.</string>
 </resources>

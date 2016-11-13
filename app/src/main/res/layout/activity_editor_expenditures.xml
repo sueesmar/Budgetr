@@ -30,7 +30,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_weight="1.5">
 
             <EditText
                 android:id="@+id/et_editor_expenditures_amount"
@@ -67,12 +67,10 @@
             android:textColor="@color/colorTextEditorExpenditure"
             android:paddingBottom="8dp"/>
 
-
-
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1.5">
 
             <!-- TODO Change to DatePicker when time left-->
             <EditText
@@ -103,22 +101,20 @@
             android:textColor="@color/colorTextEditorExpenditure"
             android:paddingBottom="8dp"/>
 
-        <EditText
-            android:id="@+id/et_editor_expenditures_place"
-            android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:gravity="top|left"
-            android:textColor="@color/colorTextEditorExpenditure"
-            android:paddingBottom="8dp" />
-
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_weight="1.5">
 
+            <EditText
+                android:id="@+id/et_editor_expenditures_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/colorTextEditorExpenditure"
+                android:paddingBottom="8dp" />
         </RelativeLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -133,31 +129,30 @@
             android:layout_height="wrap_content"
             android:text="@string/editor_expenditures_description"
             android:textColor="@color/colorTextEditorExpenditure"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"/>
 
         <EditText
             android:id="@+id/et_editor_expenditures_description"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:lines="4"
             android:gravity="top|left"
             android:hint="@string/hint_editor_expenditures_description"
             android:textColor="@color/colorTextEditorExpenditure"
             android:paddingBottom="8dp" />
-
-        <Button
-            android:id="@+id/bCaptureReceipt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/txAllRightReserved"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/signinbutton"
-            android:onClick="onClickTakePicture"
-            android:text="Capture receipt"
-            android:textColor="#ffffff" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/bCaptureReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/signinbutton"
+        android:onClick="onClickTakePicture"
+        android:text="Capture receipt"
+        android:textColor="#ffffff" />
 
 </LinearLayout>

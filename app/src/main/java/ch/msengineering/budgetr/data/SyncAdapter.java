@@ -328,6 +328,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         String[] projection = {
                 BudgetrContract.SalaryEntry._ID,
                 BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION,
                 BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT};
 
         Cursor cursor = mContentResolver.query(
@@ -436,6 +437,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         String[] projection = {
                 BudgetrContract.SalaryEntry._ID,
                 BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT,
+                BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION,
                 BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE};
 
         Cursor cursor = mContentResolver.query(
@@ -454,10 +456,12 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
         int idColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry._ID);
         int valueColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT);
         int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE);
+        int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION);
 
         // Variables for sending to server
         int salaryId;
         String salaryDate;
+        String salaryDescription;
         double salaryValue;
 
         JSONArray earningArray = new JSONArray();
@@ -469,6 +473,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                 // Read the expenditure attributes from the Cursor for the current expenditure
                 salaryId = cursor.getInt(idColumnIndex);
                 salaryDate = cursor.getString(dateColumnIndex);
+                salaryDescription = cursor.getString(descriptionColumnIndex);
                 salaryValue = cursor.getDouble(valueColumnIndex);
 
                 JSONObject currentEarning = new JSONObject();
@@ -476,6 +481,7 @@ class SyncAdapter extends AbstractThreadedSyncAdapter {
                 try {
                     currentEarning.put("idsalary", salaryId);
                     currentEarning.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE, salaryDate);
+                    currentEarning.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION, salaryDescription);
                     currentEarning.put(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT, salaryValue);
 
                     //Add the values of the current JSONObject to the JSONArray

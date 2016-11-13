@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import ch.msengineering.budgetr.data.BudgetrContract;
 
 public class BalanceOverviewActivity extends AppCompatActivity {
@@ -15,6 +17,7 @@ public class BalanceOverviewActivity extends AppCompatActivity {
     TextView mTotalEarningTextView;
     TextView mTotalExpenditureTextView;
     TextView mActualBalanceTextView;
+    TextView mActualBalanceCurrencyTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,7 @@ public class BalanceOverviewActivity extends AppCompatActivity {
         mTotalEarningTextView = (TextView) findViewById(R.id.tv_balance_overview_money_earned);
         mTotalExpenditureTextView = (TextView) findViewById(R.id.tv_balance_overview_money_spent);
         mActualBalanceTextView = (TextView) findViewById(R.id.tv_balance_overview_balance_value);
+        mActualBalanceCurrencyTextView = (TextView) findViewById(R.id.tv_balance_overview_money_balance_currency);
 
         Button bEarnings = (Button) findViewById(R.id.btn_show_earnings);
         bEarnings.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +140,10 @@ public class BalanceOverviewActivity extends AppCompatActivity {
 
         if(0 > actualBalance){
             mActualBalanceTextView.setTextColor(getResources().getColor(R.color.colorTextBalanceOverviewNegativ));
+            mActualBalanceCurrencyTextView.setTextColor(getResources().getColor(R.color.colorTextBalanceOverviewNegativ));
         } else {
             mActualBalanceTextView.setTextColor(getResources().getColor(R.color.colorTextBalanceOverview));
+            mActualBalanceCurrencyTextView.setTextColor(getResources().getColor(R.color.colorTextBalanceOverview));
         }
 
         mActualBalanceTextView.setText(String.format("%1$.2f", actualBalance));

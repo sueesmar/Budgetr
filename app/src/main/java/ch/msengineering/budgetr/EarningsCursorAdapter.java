@@ -15,6 +15,9 @@ import ch.msengineering.budgetr.data.BudgetrContract;
  * Created by Marcel on 05.11.2016.
  */
 
+/***
+ * Class for binding earnings to the {@link android.widget.ListView}
+ */
 public class EarningsCursorAdapter extends CursorAdapter{
 
     /**
@@ -60,15 +63,14 @@ public class EarningsCursorAdapter extends CursorAdapter{
         TextView valueTextView = (TextView) view.findViewById(R.id.tv_earnings_overview_value);
 
         // Find the columns of earnings attributes that we're interested in
-        //TODO: Add Descrition to salary table
-        int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE);
+        int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDESCRIPTION);
         int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYDATE);
         int valueColumnIndex = cursor.getColumnIndex(BudgetrContract.SalaryEntry.COLUMN_NAME_SALARYMOUNT);
 
         // Read the earning attributes from the Cursor for the current earning
         String earningDescription = cursor.getString(descriptionColumnIndex);
         String earningDate = cursor.getString(dateColumnIndex);
-        float earningValue = cursor.getFloat(valueColumnIndex);
+        double earningValue = cursor.getDouble(valueColumnIndex);
 
         // If the description is empty string or null, then use some default text
         // that says "Unknown breed", so the TextView isn't blank.

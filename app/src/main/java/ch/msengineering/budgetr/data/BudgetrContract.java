@@ -9,6 +9,9 @@ import android.provider.BaseColumns;
  * Created by Marcel on 05.11.2016.
  */
 
+/***
+ * Class which describes the database tables.
+ */
 public class BudgetrContract {
 
     private BudgetrContract(){}
@@ -115,6 +118,7 @@ public class BudgetrContract {
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_NAME_SALARYMOUNT = "salarymount";
         public static final String COLUMN_NAME_SALARYDATE = "salarydate";
+        public static final String COLUMN_NAME_SALARYDESCRIPTION = "salarydescription";
         public static final String COLUMN_NAME_USER_ID = "userid";
     }
 
