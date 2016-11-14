@@ -3,78 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_50aa2e73e8d0b4863ead2a1ff968c3d802940c5d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_71fea176e3bef13d1a3bd0d9deab2f3758b7126a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_153a7b216608a15ec0473b16d1624bd78049ceef/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_9e9cdb48b6e21f2199dacf1322133cef6c663d0f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_95fc2ded609bd4f8ed1cb703d5a37e4ce511dfd4/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Cengiz/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_685c00ffa3cf6043ed275e9589909d0f5fb45062/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ecf725e0ee1258d0110bc368ae07fa532185e06d">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_c4b29743006fd5a48eb908fe13ad79e83f23c656/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/design/23.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="8a5238e4bdcd6568b82db669d41817de670586b8">
-        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.0.0_261dc009ff4c3b345980418d810e1090d0297a6b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
@@ -84,12 +12,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_50aa2e73e8d0b4863ead2a1ff968c3d802940c5d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
         <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_f46072af3d990ab80a9ea47a6d2d058a501e9280/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_71fea176e3bef13d1a3bd0d9deab2f3758b7126a/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -129,6 +75,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_153a7b216608a15ec0473b16d1624bd78049ceef/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -147,11 +102,38 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_9e9cdb48b6e21f2199dacf1322133cef6c663d0f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_95fc2ded609bd4f8ed1cb703d5a37e4ce511dfd4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Cengiz/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_685c00ffa3cf6043ed275e9589909d0f5fb45062/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="ed5a41515346e46dbbce7d2ee95b46cb31b83e53">
+        sha1="3806f1d1df3beb180695b24ce3b9684ab88b7f0c">
         <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f03f526864306fd5bbcd1c6eb9fe43acbaee635d/classes.dex" />
     </item>
     <item
@@ -165,12 +147,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e36c0a776feeb1d859f713908de1cfc1543e6399">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_c4b29743006fd5a48eb908fe13ad79e83f23c656/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
         <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_24866ce148ab9b52ca69a5e6956535837c48badc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/exploded-aar/com.android.support/design/23.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8a5238e4bdcd6568b82db669d41817de670586b8">
+        <dex dex="/Users/Cengiz/AndroidStudioProjects/Budgetr/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.0.0_261dc009ff4c3b345980418d810e1090d0297a6b/classes.dex" />
     </item>
 
 </items>

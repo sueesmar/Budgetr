@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_editor_expenditures"
     android:layout_width="match_parent"
@@ -142,10 +143,17 @@
             android:hint="@string/hint_editor_expenditures_description"
             android:textColor="@color/colorTextEditorExpenditure"
             android:paddingBottom="8dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/imgPicture"
+            android:contentDescription="" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/bCaptureReceipt"
+        android:id="@+id/bCapture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"

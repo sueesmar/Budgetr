@@ -1,5 +1,6 @@
 package ch.msengineering.budgetr;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -8,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -19,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -67,6 +70,8 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
      * Button to capture receipt
      */
     private Button mCameraButton;
+    private static final int CAMERA_REQUEST = 1888;
+    private ImageView imageView;
 
 
     /**
@@ -101,7 +106,18 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         mDateEditText = (EditText) findViewById(R.id.et_editor_expenditures_date);
         mPlaceEditText = (EditText) findViewById(R.id.et_editor_expenditures_place);
         mDescriptionEditText = (EditText) findViewById(R.id.et_editor_expenditures_description);
-        mCameraButton = (Button) findViewById(R.id.bCaptureReceipt);
+        mCameraButton = (Button) findViewById(R.id.bCapture);
+
+        this.imageView = (ImageView)this.findViewById(R.id.imgPicture);
+        Button captureButton = (Button) this.findViewById(R.id.bCapture);
+        captureButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
 
         // If the intent DOES NOT contain a expenditure content URI, then we know that we are
         // creating a new expenditure.
@@ -124,15 +140,6 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             getLoaderManager().initLoader(EXISTING_EXPENDITURE_LOADER, null, this);
         }
 
-        mCameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent camearaIntent = new Intent(getApplicationContext(), CameraActivity.class);
-                startActivity(camearaIntent);
-
-            }
-        });
-
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
@@ -141,6 +148,16 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         mPlaceEditText.setOnTouchListener(mTouchListener);
         mDescriptionEditText.setOnTouchListener(mTouchListener);
 
+    }
+
+    /**
+     * Get captured picture
+     */
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(photo);
+        }
     }
 
     /**

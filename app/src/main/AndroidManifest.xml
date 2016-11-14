@@ -34,7 +34,7 @@
         <activity android:name=".ListExpendituresActivity" android:label="@string/label_activity_list_expenditures"/>
         <activity android:name=".EditorEarningsActivity" />
         <activity android:name=".EditorExpendituresActivity"/>
-        <activity android:name=".CameraActivity" />
+
         <provider
             android:name=".data.BudgetrProvider"
             android:authorities="ch.mse.myBudget"
