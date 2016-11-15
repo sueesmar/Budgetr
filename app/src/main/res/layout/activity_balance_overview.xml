@@ -21,7 +21,7 @@
         android:textColor="@color/colorTextBalanceOverview"
         android:textAppearance="?android:textAppearanceSmall"
         android:textStyle="normal"
-        android:paddingBottom="32dp"/>
+        android:paddingBottom="24dp"/>
 
         <LinearLayout
         android:id="@+id/container_balance_overview_earning"
@@ -124,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="16dp">
+        android:paddingTop="8dp">
 
         <TextView
             android:id="@+id/tv_balance_overview_balance"
