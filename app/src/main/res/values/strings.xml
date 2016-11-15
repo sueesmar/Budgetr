@@ -5,6 +5,8 @@
     <string name="label_activity_balance_overview">Balance Overview</string>
     <string name="label_activity_list_earnings">My Earnings</string>
     <string name="label_activity_list_expenditures">My Expenditures</string>
+    <string name="label_activity_picture_fullscreen">Receipt</string>
+    <string name="toast_no_picture_expenditure">No Receipt for this expenditure!</string>
     <string name="toast_register_successful">Registration of user successful. Please Login with your credentials.</string>
     <string name="welcometext_activity_main">Know where your money goes</string>
     <string name="btn_new_to_budgetr">New to Budgetr</string>
@@ -48,6 +50,7 @@
     <string name="tv_editor_expenditures_place">Place</string>
     <string name="hint_editor_expenditures_place">Where you spent your money?</string>
     <string name="hint_editor_expenditures_date">YYYY-MM-DD</string>
+    <string name="btn_capture_receipt">Capture Receipt</string>
 
     <!-- activity_editor_earnings.xml -->
     <string name="editor_earnings_description">Description</string>

@@ -69,4 +69,7 @@
     <string name="et_hint_username">Benutzername</string>
     <string name="text_register_account">Erstelle ein Konto</string>
     <string name="tv_balance_overview_description">Die Übersicht zeigt Ihnen die Ausgaben und Einnahmen des aktuellen Monats und berechnet den aktuellen Kontostand. Die Rücksetzung erfolgt in den einzelnen Listenansichten.</string>
+    <string name="label_activity_picture_fullscreen">Beleg</string>
+    <string name="toast_no_picture_expenditure">Keinen Beleg für diese Ausgabe!</string>
+    <string name="btn_capture_receipt">Foto hinzufügen</string>
 </resources>

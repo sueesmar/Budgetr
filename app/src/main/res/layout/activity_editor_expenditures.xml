@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_editor_expenditures"
     android:layout_width="match_parent"
@@ -47,6 +46,7 @@
                 android:id="@+id/tv_editor_expenditures_currency"
                 android:textColor="@color/colorTextEditorExpenditure"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:paddingRight="16dp"
                 android:paddingTop="16dp"
                 android:text="@string/tv_currency" />
@@ -148,9 +148,9 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            app:srcCompat="@mipmap/ic_launcher"
+            android:src="@drawable/ic_photo_camera"
             android:id="@+id/imgPicture"
-            android:contentDescription="" />
+            android:contentDescription="@string/app_name" />
     </LinearLayout>
 
     <Button
@@ -158,9 +158,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/signinbutton"
-        android:text="Capture receipt"
+        android:text="@string/btn_capture_receipt"
         android:textColor="#ffffff" />
 
 </LinearLayout>

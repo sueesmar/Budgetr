@@ -10,6 +10,7 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -136,18 +137,20 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             }
         });
 
-        //TODO Create Listener for Intent to open picture in big format
-        /*
+        //Shows a larger Image of the receipt after clicking it.
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(android.content.Intent.ACTION_VIEW);
-                Uri uri = Uri.parse("file://" + file.getAbsolutePath());
-                intent.setDataAndType(uri,"image/*");
+                if(mPicturePath != null) {
+                    Intent intent = new Intent(EditorExpendituresActivity.this, PictureViewActivity.class);
+                    intent.putExtra("picturePath", mPicturePath);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(EditorExpendituresActivity.this, getString(R.string.toast_no_picture_expenditure), Toast.LENGTH_LONG).show();
+                }
             }
         });
-        */
+
 
         // If the intent DOES NOT contain a expenditure content URI, then we know that we are
         // creating a new expenditure.
@@ -182,9 +185,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
 
     /***
      * Gets back the picture from the camara and saves the photo to the internal storage of the app.
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     *
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
