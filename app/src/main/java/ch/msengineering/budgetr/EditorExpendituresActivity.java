@@ -1,20 +1,28 @@
 package ch.msengineering.budgetr;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -24,6 +32,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -73,6 +83,12 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
 
+    /**
+     * Variables for picture stored.
+     */
+    private Bitmap mPicture;
+    private String mPicturePath;
+
 
     /**
      * Boolean flag that keeps track of whether the expenditure has been edited (true) or not (false)
@@ -108,6 +124,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         mDescriptionEditText = (EditText) findViewById(R.id.et_editor_expenditures_description);
         mCameraButton = (Button) findViewById(R.id.bCapture);
 
+        //ImageView for the picture from camera
         this.imageView = (ImageView)this.findViewById(R.id.imgPicture);
         Button captureButton = (Button) this.findViewById(R.id.bCapture);
         captureButton.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +135,19 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
         });
+
+        //TODO Create Listener for Intent to open picture in big format
+        /*
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(android.content.Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("file://" + file.getAbsolutePath());
+                intent.setDataAndType(uri,"image/*");
+            }
+        });
+        */
 
         // If the intent DOES NOT contain a expenditure content URI, then we know that we are
         // creating a new expenditure.
@@ -150,15 +180,58 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
 
     }
 
-    /**
-     * Get captured picture
+    /***
+     * Gets back the picture from the camara and saves the photo to the internal storage of the app.
+     * @param requestCode
+     * @param resultCode
+     * @param data
      */
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(photo);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // todo use appropriate resultCode in your case
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+               // this case will occur when taking a picture with a camera
+                mPicture = null;
+                Cursor cursor = this.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        new String[]{MediaStore.Images.Media.DATA, MediaStore.Images.Media.DATE_ADDED,
+                                MediaStore.Images.ImageColumns.ORIENTATION}, MediaStore.Images.Media.DATE_ADDED,
+                        null, "date_added DESC");
+                if (cursor != null && cursor.moveToFirst()) {
+                    Uri uri = Uri.parse(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA)));
+                    String photoPath = uri.toString();
+                    cursor.close();
+                    if (photoPath != null) {
+                        mPicture = BitmapFactory.decodeFile(photoPath);
+                    }
+                }
+
+                if (mPicture == null) {
+                    // for safety reasons you can
+                    // use thumbnail if not retrieved full sized image
+                    mPicture = (Bitmap) data.getExtras().get("data");
+                }
+
+                mPicturePath = "";
+                File internalStorage = this.getDir("ExpenditurePictures", Context.MODE_PRIVATE);
+                File expenditureFilePath = new File(internalStorage, new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".png");
+                mPicturePath = expenditureFilePath.toString();
+
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(expenditureFilePath);
+                    mPicture.compress(Bitmap.CompressFormat.PNG, 100 /*quality*/, fos);
+                    fos.close();
+                    imageView.setImageBitmap(mPicture);
+                }
+                catch (Exception ex) {
+                    Log.i("DATABASE", "Problem updating picture", ex);
+                    mPicturePath = "";
+            }
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
 
     /**
      * Get user input from editor and save expenditure into database.
@@ -187,6 +260,7 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE, dateString);
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE, placeString);
         values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION, descriptionString);
+        values.put(BudgetrContract.ExpenditureEntry.COLUMN_NAME_RECEIPT,mPicturePath);
         // If the amount is not provided by the user, don't try to parse the string into an
         // double value. Use 0 by default.
         double amount = 0;
@@ -333,7 +407,8 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
                 BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT,
                 BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE,
                 BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE,
-                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION};
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION,
+                BudgetrContract.ExpenditureEntry.COLUMN_NAME_RECEIPT};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -359,18 +434,23 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
             int dateColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE);
             int placeColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE);
             int descriptionColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION);
+            int pictureColumnIndex = cursor.getColumnIndex(BudgetrContract.ExpenditureEntry.COLUMN_NAME_RECEIPT);
 
             // Extract out the value from the Cursor for the given column index
             double amount = cursor.getDouble(amountColumnIndex);
             String date = cursor.getString(dateColumnIndex);
             String place = cursor.getString(placeColumnIndex);
             String description = cursor.getString(descriptionColumnIndex);
+            mPicturePath = cursor.getString(pictureColumnIndex);
 
             // Update the views on the screen with the values from the database
             mAmountEditText.setText(String.format(Locale.US,"%1$.2f",amount));
             mDateEditText.setText(date);
             mPlaceEditText.setText(place);
             mDescriptionEditText.setText(description);
+            if (mPicturePath != null && mPicturePath.length() != 0){
+                imageView.setImageBitmap(BitmapFactory.decodeFile(mPicturePath));
+            }
         }
     }
 
@@ -462,6 +542,12 @@ public class EditorExpendituresActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.editor_expenditures_delete_expenditure_successful),
                         Toast.LENGTH_SHORT).show();
             }
+        }
+
+        //Delete Picture wenn entry in database is deleted
+        if (mPicturePath != null && mPicturePath.length() != 0) {
+            File expenditureFilePath = new File(mPicturePath);
+            expenditureFilePath.delete();
         }
 
         // Close the activity

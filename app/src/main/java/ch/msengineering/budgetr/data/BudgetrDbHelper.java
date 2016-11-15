@@ -18,7 +18,7 @@ public class BudgetrDbHelper extends SQLiteOpenHelper {
     /**
      * Database version. If you change the database schema, you must increment the database version.
      */
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     /**
      * Constructs a new instance of {@link BudgetrDbHelper}.
@@ -49,7 +49,7 @@ public class BudgetrDbHelper extends SQLiteOpenHelper {
                 + BudgetrContract.ExpenditureEntry.COLUMN_NAME_DESCRIPTION + " TEXT, "
                 + BudgetrContract.ExpenditureEntry.COLUMN_NAME_AMOUNT + " REAL NOT NULL, "
                 + BudgetrContract.ExpenditureEntry.COLUMN_NAME_DATE + " TEXT, "
-                + BudgetrContract.ExpenditureEntry.COLUMN_NAME_RECEIPT + " BLOB, "
+                + BudgetrContract.ExpenditureEntry.COLUMN_NAME_RECEIPT + " TEXT, "
                 + BudgetrContract.ExpenditureEntry.COLUMN_NAME_PLACE + " TEXT, "
                 + BudgetrContract.ExpenditureEntry.COLUMN_NAME_PAYMENTMETHODE + " TEXT, "
                 + BudgetrContract.ExpenditureEntry.COLUMN_NAME_USER_ID + " INTEGER,"

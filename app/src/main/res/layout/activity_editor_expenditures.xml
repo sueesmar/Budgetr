@@ -145,8 +145,9 @@
             android:paddingBottom="8dp" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
             app:srcCompat="@mipmap/ic_launcher"
             android:id="@+id/imgPicture"
             android:contentDescription="" />
@@ -159,7 +160,6 @@
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_centerHorizontal="true"
         android:background="@drawable/signinbutton"
-        android:onClick="onClickTakePicture"
         android:text="Capture receipt"
         android:textColor="#ffffff" />
 
